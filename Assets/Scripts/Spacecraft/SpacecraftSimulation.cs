@@ -6,14 +6,13 @@ using UnityEngine;
 public struct SpacecraftSimulationProperties
 {
     public float mass;
-    public float maxVelocity;
+    public float drag;
 }
 
 public class SpacecraftSimulation
 {
     public SpacecraftSimulationProperties Properties;
 
-    private Vector3 _initialVelocity;
     private Vector3 _velocity;
     private Vector3 _acceleration;
 
@@ -24,9 +23,9 @@ public class SpacecraftSimulation
 
     public Vector3 UpdatePosition(Vector3 position, float dt)
     {
-        Vector3 velocity = Vector3.ClampMagnitude(_velocity, Properties.maxVelocity);
+        _velocity *= Mathf.Clamp01(1f - Properties.drag * dt);
 
-        return position + velocity * dt;
+        return position + _velocity * dt;
     }
 
     public void AddForce(Vector2 force)
@@ -34,10 +33,7 @@ public class SpacecraftSimulation
         float mass = Properties.mass != 0 ? Properties.mass : 1; // TODO: check it
 
         _acceleration = force / mass;
-        _velocity = _initialVelocity + _acceleration;
-        _initialVelocity = _velocity;
-
-        // TODO: add linear drag
+        _velocity += _acceleration;
     }
 
     public Quaternion Rotate(Quaternion rotation, float angle)

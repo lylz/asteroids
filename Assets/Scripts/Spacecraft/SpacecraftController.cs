@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SpacecraftController
 {
     private InputSystem _inputSystem;
@@ -35,7 +37,6 @@ public class SpacecraftController
             _transformAdapter.rotation = _spacecraftSimulation.Rotate(_transformAdapter.rotation, -10.0f);
         }
 
-        // TODO: add force gradually with some step (e.g. each 200ms)
         if (_move)
         {
             _spacecraftSimulation.AddForce(_transformAdapter.lookDirection * 0.5f);
