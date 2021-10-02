@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class SpacecraftController
+public class SpacecraftController : BaseController
 {
     private InputSystem _inputSystem;
-    private ITransformAdapter _transformAdapter;
     private SpacecraftSimulation _spacecraftSimulation;
 
     private bool _move;
@@ -13,20 +12,25 @@ public class SpacecraftController
     public SpacecraftController(
         SpacecraftSimulation spacecraftSimulation,
         InputSystem inputSystem,
-        ITransformAdapter transformAdapter
+        ITransformAdapter transformAdapter,
+        Vector2 screenBounds
     )
+        : base(transformAdapter, screenBounds)
     {
         _spacecraftSimulation = spacecraftSimulation;
         _inputSystem = inputSystem;
         _transformAdapter = transformAdapter;
+        _screenBounds = new Bounds(new Vector3(0, 0, 0), screenBounds * 2);
 
         _inputSystem.MoveForwardEvent += OnMoveForward;
         _inputSystem.RotateLeftEvent += OnRotateLeft;
         _inputSystem.RotateRightEvent += OnRotateRight;
     }
 
-    public void FixedUpdate(float dt)
+    public override void FixedUpdate(float dt)
     {
+        base.FixedUpdate(dt);
+
         if (_rotateLeft)
         {
             _transformAdapter.rotation = _spacecraftSimulation.Rotate(_transformAdapter.rotation, 10.0f);

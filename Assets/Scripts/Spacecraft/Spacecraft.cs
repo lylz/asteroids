@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spacecraft : MonoBehaviour, ITransformAdapter
+public class Spacecraft : BaseBehavior
 {
     public SpacecraftSimulationProperties SpacecraftSimulationProperties;
 
@@ -12,31 +12,21 @@ public class Spacecraft : MonoBehaviour, ITransformAdapter
     private SpacecraftSimulation _spacecraftSimulation;
     private SpacecraftController _spacecraftController;
 
-    public Vector3 position
+    protected override void Awake()
     {
-        get { return transform.position; }
-        set { transform.position = value; }
-    }
+        base.Awake();
 
-    public Quaternion rotation
-    {
-        get { return transform.rotation; }
-        set { transform.rotation = value; }
-    }
-
-    public Vector3 lookDirection
-    {
-        get { return transform.up; }
-    }
-
-    private void Awake()
-    {
         _spacecraftSimulation = new SpacecraftSimulation(SpacecraftSimulationProperties);
-        _spacecraftController = new SpacecraftController(_spacecraftSimulation, _inputSystem, this);
+        _spacecraftController = new SpacecraftController(_spacecraftSimulation, _inputSystem, this, _screenBounds);
     }
 
     private void FixedUpdate()
     {
         _spacecraftController.FixedUpdate(Time.fixedDeltaTime);
+    }
+
+    private void LateUpdate()
+    {
+        _spacecraftController.LateUpdate();
     }
 }
