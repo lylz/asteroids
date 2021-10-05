@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf7e9706c992814e8c0cf65ef9bd2cd, type: 3}
   m_Name: SmallAsteroid
   m_EditorClassIdentifier: 
-  scale: 0.25
-  speed: 2
-  rotationAngle: 50
+  scale: 0.5
+  speed: 1.4
+  rotationAngle: 45
   spawnCount: 0
-  spawnAsteroidPrefab: {fileID: 0}
+  spawnAsteroidConfig: {fileID: 0}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf7e9706c992814e8c0cf65ef9bd2cd, type: 3}
   m_Name: MediumAsteroid
   m_EditorClassIdentifier: 
-  scale: 0.5
-  speed: 1.5
-  rotationAngle: 50
+  scale: 1
+  speed: 1.25
+  rotationAngle: 45
   spawnCount: 2
-  spawnAsteroidPrefab: {fileID: 6777108547882193820, guid: 009960927b202964795c4e12af690f6c, type: 3}
+  spawnAsteroidConfig: {fileID: 11400000, guid: 997a8416ba17bac49a2b0b2fe699e599, type: 2}

@@ -298,6 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1004037057}
+  - component: {fileID: 1004037058}
   - component: {fileID: 1004037056}
   m_Layer: 0
   m_Name: GameManager
@@ -318,9 +319,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf0ae3301e7c3e44af1848a8079720e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnIntervalInSeconds: 1
+  AsteroidsSpawnIntervalInSeconds: 1
+  UFOSpawnIntervalInSeconds: 1
+  SpawnEvents: {fileID: 11400000, guid: 03e6bbdc5942eb947b1fad2b16ce9026, type: 2}
   _asteroidPrefab: {fileID: 5805385403075648533, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
   _asteroidsToSpawn: 4
+  _ufoPrefab: {fileID: 4554977861145465802, guid: ee05c2c09e1ad1742b699818767d429d, type: 3}
+  _ufoToSpawn: 2
 --- !u!4 &1004037057
 Transform:
   m_ObjectHideFlags: 0
@@ -335,6 +340,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1004037058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004037055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8814e40c6859d0e4099668cf377b9d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1700170199539543874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -390,5 +407,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spacecraft
       objectReference: {fileID: 0}
+    - target: {fileID: 3297167309509306012, guid: af0148481e6b48f42bc034914d14e016, type: 3}
+      propertyPath: SpacecraftPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: 7be0bad4e9c50334e8c3d137adf88096, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af0148481e6b48f42bc034914d14e016, type: 3}

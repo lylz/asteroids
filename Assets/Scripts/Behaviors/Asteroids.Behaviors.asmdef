@@ -1,0 +1,16 @@
+{
+    "name": "Asteroids.Behaviors",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e4b1e5e860802ee47a22cb4c52ff411c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

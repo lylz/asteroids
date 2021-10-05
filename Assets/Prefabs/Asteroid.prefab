@@ -123,4 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f30b3d71b1f3348b3bd23fe807bec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asteroidConfig: {fileID: 11400000, guid: f9079731d570b2e4fa2e6a8686290b95, type: 2}
+  AsteroidEvents: {fileID: 11400000, guid: c98ba47b789d952469da9995926ae846, type: 2}
+  AsteroidConfig: {fileID: 11400000, guid: f9079731d570b2e4fa2e6a8686290b95, type: 2}
