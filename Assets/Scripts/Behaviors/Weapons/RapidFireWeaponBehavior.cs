@@ -18,14 +18,12 @@ public class RapidFireWeaponBehavior : WeaponBehavior
 
     private void OnWeaponFired(IWeaponConfig weaponConfig)
     {
+        // TODO: identify that it is a correct weapon shooting
         if (weaponConfig is IRapidFireWeaponConfig)
         {
             IRapidFireWeaponConfig config = weaponConfig as IRapidFireWeaponConfig;
-            // TODO: Player.FireSlot here
-            // TODO: Player.lookDirection here
             BulletProjectile bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
-            bullet.Speed = config.ProjectileSpeed;
-            bullet.Lifetime = config.ProjectileLifetime;
+            bullet.WeaponConfig = RapidFireWeaponConfig; // TODO: check it
             bullet.Direction = transform.up;
         }
     }

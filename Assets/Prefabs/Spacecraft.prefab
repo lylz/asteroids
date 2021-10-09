@@ -152,7 +152,7 @@ MonoBehaviour:
     drag: 2
   SpacecraftPosition: {fileID: 11400000, guid: 7be0bad4e9c50334e8c3d137adf88096, type: 2}
   PrimaryWeaponPrefab: {fileID: 1303346343780600043, guid: a2dab3e9fbbeef5438a34cb7381dd417, type: 3}
-  SecondaryWeaponPrefab: {fileID: 1303346343780600043, guid: a2dab3e9fbbeef5438a34cb7381dd417, type: 3}
+  SecondaryWeaponPrefab: {fileID: 6952644414917581274, guid: 9d81cad140e5f54489545f9ddb23aa9e, type: 3}
   _inputSystem: {fileID: 11400000, guid: 13cbcf4c18d02cc46a81e48aa5cf6831, type: 2}
 --- !u!1001 &739122084592534956
 PrefabInstance:

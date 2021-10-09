@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AsteroidController : GameObjectController
 {
+    private ISpawnEvents _spawnEvents;
     private IAsteroidEvents _asteroidEvents;
 
     private IAsteroid _asteroid;
@@ -10,6 +11,7 @@ public class AsteroidController : GameObjectController
     private ITransformAdapter _transformAdapter;
 
     public AsteroidController(
+        ISpawnEvents spawnEvents,
         IAsteroidEvents asteroidEvents,
         IAsteroid asteroid,
         Vector2 screenBounds,
@@ -17,6 +19,7 @@ public class AsteroidController : GameObjectController
     )
         : base(new IPostUpdateProcessor[] { new PortalPostUpdateProcessor(screenBounds, transformAdapter) })
     {
+        _spawnEvents = spawnEvents;
         _asteroidEvents = asteroidEvents;
         _asteroid = asteroid;
         _velocity = GenerateVelocity(_asteroid.GetAsteroidConfig().Speed);
@@ -63,11 +66,11 @@ public class AsteroidController : GameObjectController
         {
             for (int i = 0; i < asteroidConfig.SpawnCount; i++)
             {
-                Vector3 position = _transformAdapter.position;
+                // TODO: improve position picking
+                Vector3 position = _transformAdapter.position - new Vector3(1 + i, 1 + i, 0);
                 Quaternion rotation = Quaternion.identity;
 
-                // TODO: make SpawnManager Singleton
-                // TODO: SpawnManager.Instance.SpawnAsteroid(asteroidConfig, position, rotation);
+                _spawnEvents.InvokeAsteroidSpawned(asteroidConfig.SpawnAsteroidConfig, position, rotation);
             }
         }
     }

@@ -43,4 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8780a13b82bb35499101b0ef6ec07c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserPrefab: {fileID: 0}
+  LaserPrefab: {fileID: 4569554335188092695, guid: 3a2500fad9386004a8e7356b580d8b15, type: 3}
+  WeaponEvents: {fileID: 11400000, guid: 054ea563d4099b748ac4baeca49da872, type: 2}
+  LaserWeaponConfig: {fileID: 11400000, guid: b1f182639439811488bd1b9164ddf0e7, type: 2}

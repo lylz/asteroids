@@ -325,7 +325,7 @@ MonoBehaviour:
   _asteroidPrefab: {fileID: 5805385403075648533, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
   _asteroidsToSpawn: 4
   _ufoPrefab: {fileID: 4554977861145465802, guid: ee05c2c09e1ad1742b699818767d429d, type: 3}
-  _ufoToSpawn: 2
+  _ufoToSpawn: 0
 --- !u!4 &1004037057
 Transform:
   m_ObjectHideFlags: 0

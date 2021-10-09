@@ -3,7 +3,9 @@ using UnityEngine.Events;
 public class Timer
 {
     public UnityAction<Timer> TimerFinished = delegate { };
+    public bool IsFinished { get => _isFinished; }
 
+    private bool _isFinished;
     private float _remainingTime;
 
     public Timer(float duration)
@@ -32,6 +34,7 @@ public class Timer
         _remainingTime = 0;
 
         TimerFinished.Invoke(this);
+        _isFinished = true;
     }
 }
 

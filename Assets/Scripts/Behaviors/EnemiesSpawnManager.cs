@@ -54,6 +54,11 @@ public class EnemiesSpawnManager : MonoBehaviour
     private void OnAsteroidSpawned(IAsteroidConfig config, Vector3 position, Quaternion rotation)
     {
         Asteroid asteroid = Instantiate(_asteroidPrefab, position, rotation);
+
+        if (config != null && config is AsteroidConfig)
+        {
+            asteroid.AsteroidConfig = config as AsteroidConfig;
+        }
     }
 
     private void OnUFOSpawned(Vector3 position, Quaternion rotation)
