@@ -43,4 +43,10 @@ public class LaserWeaponBehavior : WeaponBehavior
             _activeLaser = null;
         }
     }
+
+    private void OnDestroy()
+    {
+        _weaponController.LaserActivated -= OnLaserActivated;
+        _weaponController.LaserDeactivated -= OnLaserDeactivated;
+    }
 }

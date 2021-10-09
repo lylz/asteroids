@@ -6,6 +6,7 @@ public class SpacecraftController : GameObjectController
     private SpacecraftSimulation _spacecraftSimulation;
     private ITransformAdapter _transformAdapter;
     private ISpacecraftPositionTracker _positionTracker;
+    private IPlayerEvents _playerEvents;
 
     private IWeapon _primaryWeapon;
     private IWeapon _secondaryWeapon;
@@ -18,6 +19,7 @@ public class SpacecraftController : GameObjectController
         IWeapon primaryWeapon,
         IWeapon secondaryWeapon,
         SpacecraftSimulation spacecraftSimulation,
+        IPlayerEvents playerEvents,
         InputControlsSystem inputSystem,
         Vector2 screenBounds,
         ISpacecraftPositionTracker spacecraftPosition,
@@ -31,6 +33,7 @@ public class SpacecraftController : GameObjectController
         _secondaryWeapon = secondaryWeapon;
         _spacecraftSimulation = spacecraftSimulation;
         _inputSystem = inputSystem;
+        _playerEvents = playerEvents;
         _transformAdapter = transformAdapter;
         _positionTracker = spacecraftPosition;
 
@@ -63,6 +66,11 @@ public class SpacecraftController : GameObjectController
         Vector3 newPosition = _spacecraftSimulation.UpdatePosition(_transformAdapter.position, dt);
         _positionTracker.InstantSpeed = newPosition - _transformAdapter.position;
         _transformAdapter.position = newPosition;
+    }
+
+    public void Hit(Collider2D collision)
+    {
+        _playerEvents.InvokePlayerDied();
     }
 
     private void OnMoveForward()

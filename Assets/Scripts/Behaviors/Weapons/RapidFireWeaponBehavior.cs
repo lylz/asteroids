@@ -27,4 +27,9 @@ public class RapidFireWeaponBehavior : WeaponBehavior
             bullet.Direction = transform.up;
         }
     }
+
+    private void OnDestroy()
+    {
+        WeaponEvents.WeaponFired -= OnWeaponFired;
+    }
 }

@@ -5,11 +5,10 @@ public class Spacecraft : BaseControllableBehavior<SpacecraftController>
     public SpacecraftSimulationProperties SpacecraftSimulationProperties;
     public SpacecraftPositionTracker SpacecraftPosition; // TODO: check it
 
-    // TODO: weapons should be instantiated if I want to use IWeapon.Shoot(). it cannot be just a prefab
-    // TODO: maybe implement some equip mechanism, so that I can pass prefabs here
-    // and on start they will be instantiated?
     public WeaponBehavior PrimaryWeaponPrefab;
     public WeaponBehavior SecondaryWeaponPrefab;
+
+    public PlayerEvents PlayerEvents;
 
     [SerializeField]
     private InputControlsSystem _inputSystem;
@@ -41,12 +40,23 @@ public class Spacecraft : BaseControllableBehavior<SpacecraftController>
             _weaponSlots[0].Weapon,
             _weaponSlots[1].Weapon,
             _spacecraftSimulation,
+            PlayerEvents,
             _inputSystem,
             _screenBounds,
             SpacecraftPosition,
             this
         );
 
-        // TODO: add OnFireHandler
+        PlayerEvents.PlayerDied += OnPlayerDied;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        _spacecraftController.Hit(collision);
+    }
+
+    private void OnPlayerDied()
+    {
+        Destroy(gameObject);
     }
 }
