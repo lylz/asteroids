@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0e1490e9d653946b73656015266bec, type: 3}
-  m_Name: LaserWeaponConfig
+  m_Script: {fileID: 11500000, guid: 317217e9207ef5246ae5e1587384c16f, type: 3}
+  m_Name: LaserInfoTracker
   m_EditorClassIdentifier: 
-  laserActiveTimeInSeconds: 1
-  maxCharges: 2
-  fireCooldownInSeconds: 4
-  rechargeCooldownInSeconds: 10

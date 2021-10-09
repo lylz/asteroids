@@ -8,34 +8,37 @@ public class LaserWeaponController : IWeaponController
 
     private IWeaponEvents _weaponEvents;
     private ILaserWeaponConfig _weaponConfig;
+    private ILaserInfoTracker _infoTracker;
 
-    private uint _currentCharges;
+    private uint _chargesLeft;
     private bool _canShoot;
     private bool _laserActive;
 
-    private List<Timer> _cooldownTimers;
+    private Timer _fireCooldownTimer;
+    private Timer _rechargeTimer;
+    private Timer _laserLifetimeTimer;
 
     public LaserWeaponController(
         ILaserWeaponConfig weaponConfig,
-        IWeaponEvents weaponEvents
+        IWeaponEvents weaponEvents,
+        ILaserInfoTracker infoTracker
     )
     {
         _weaponConfig = weaponConfig;
         _weaponEvents = weaponEvents;
-        _currentCharges = _weaponConfig.MaxCharges;
+        _infoTracker = infoTracker;
+        _chargesLeft = _weaponConfig.MaxCharges;
         _canShoot = true;
-
-        _cooldownTimers = new List<Timer>();
     }
 
     public void Shoot()
     {
-        if (!_laserActive && _canShoot && _currentCharges > 0)
+        if (!_laserActive && _canShoot && _chargesLeft > 0)
         {
-            _currentCharges--;
+            _chargesLeft--;
             _canShoot = false;
             StartFireCooldown();
-            StartRechargeCooldown();
+            StartRecharge();
             StartLaserLifetimeTimer();
             _weaponEvents.InvokeWeaponFired(_weaponConfig);
         }
@@ -48,12 +51,34 @@ public class LaserWeaponController : IWeaponController
 
     public void Update(float dt)
     {
-        _cooldownTimers.RemoveAll(t => t.IsFinished);
+        _fireCooldownTimer?.Tick(dt);
+        _rechargeTimer?.Tick(dt);
+        _laserLifetimeTimer?.Tick(dt);
 
-        foreach (var timer in _cooldownTimers)
+        UpdateLaserInfo();
+    }
+
+    private void UpdateLaserInfo()
+    {
+        _infoTracker.Charges = _chargesLeft;
+
+        float cooldownTime = 0;
+
+        if (_fireCooldownTimer != null)
         {
-            timer.Tick(dt);
+            cooldownTime = _fireCooldownTimer.RemainingTime;
         }
+
+        _infoTracker.CooldownTime = cooldownTime;
+
+        float rechargeTime = 0;
+
+        if (_rechargeTimer != null)
+        {
+            rechargeTime = _rechargeTimer.RemainingTime;
+        }
+
+        _infoTracker.RechargeTime = rechargeTime;
     }
 
     private void StartLaserLifetimeTimer()
@@ -62,7 +87,7 @@ public class LaserWeaponController : IWeaponController
         Timer laserLifetimeTimer = new Timer(_weaponConfig.LaserActiveTimeInSeconds);
         laserLifetimeTimer.TimerFinished += OnLaserLifetimeFinished;
 
-        _cooldownTimers.Add(laserLifetimeTimer);
+        _laserLifetimeTimer = laserLifetimeTimer;
         LaserActivated.Invoke();
     }
 
@@ -77,27 +102,35 @@ public class LaserWeaponController : IWeaponController
         Timer fireCooldownTimer = new Timer(_weaponConfig.FireCooldownInSeconds);
         fireCooldownTimer.TimerFinished += OnFireCooldownFinished;
 
-        _cooldownTimers.Add(fireCooldownTimer);
+        _fireCooldownTimer = fireCooldownTimer;
     }
 
     private void OnFireCooldownFinished(Timer timer)
     {
         _canShoot = true;
+        _fireCooldownTimer = null;
     }
 
-    private void StartRechargeCooldown()
+    private void StartRecharge()
     {
-        Timer rechargeCooldownTimer = new Timer(_weaponConfig.RechargeCooldownInSeconds);
-        rechargeCooldownTimer.TimerFinished += OnRechargeCooldownFinished;
-
-        _cooldownTimers.Add(rechargeCooldownTimer);
-    }
-
-    private void OnRechargeCooldownFinished(Timer timer)
-    {
-        if (_currentCharges < _weaponConfig.MaxCharges)
+        if (_chargesLeft >= _weaponConfig.MaxCharges || _rechargeTimer?.RemainingTime > 0)
         {
-            _currentCharges++;
+            return;
         }
+
+        Timer rechargeTimer = new Timer(_weaponConfig.RechargeCooldownInSeconds);
+        rechargeTimer.TimerFinished += OnRechargeFinished;
+
+        _rechargeTimer = rechargeTimer;
+    }
+
+    private void OnRechargeFinished(Timer timer)
+    {
+        if (_chargesLeft < _weaponConfig.MaxCharges)
+        {
+            _chargesLeft++;
+        }
+
+        StartRecharge();
     }
 }

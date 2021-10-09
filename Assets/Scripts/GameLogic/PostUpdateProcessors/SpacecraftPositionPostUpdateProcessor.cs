@@ -12,5 +12,6 @@ public class SpacecraftPositionPostUpdateProcessor : IPostUpdateProcessor
     public void LateUpdate()
     {
         _spacecraftPosition.Position = _transformAdapter.position;
+        _spacecraftPosition.Rotation = _transformAdapter.rotation;
     }
 }

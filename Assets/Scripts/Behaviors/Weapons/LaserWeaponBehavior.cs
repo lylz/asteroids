@@ -5,6 +5,7 @@ public class LaserWeaponBehavior : WeaponBehavior
     public Laser LaserPrefab;
     public WeaponEvents WeaponEvents;
     public LaserWeaponConfig LaserWeaponConfig;
+    public LaserInfoTracker LaserInfoTracker;
 
     public override IWeaponController WeaponController { get => _weaponController; }
 
@@ -13,7 +14,7 @@ public class LaserWeaponBehavior : WeaponBehavior
 
     private void Awake()
     {
-        _weaponController = new LaserWeaponController(LaserWeaponConfig, WeaponEvents);
+        _weaponController = new LaserWeaponController(LaserWeaponConfig, WeaponEvents, LaserInfoTracker);
         _weaponController.LaserActivated += OnLaserActivated;
         _weaponController.LaserDeactivated += OnLaserDeactivated;
     }

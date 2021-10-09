@@ -5,6 +5,7 @@ public class SpacecraftController : GameObjectController
     private InputControlsSystem _inputSystem;
     private SpacecraftSimulation _spacecraftSimulation;
     private ITransformAdapter _transformAdapter;
+    private ISpacecraftPositionTracker _positionTracker;
 
     private IWeapon _primaryWeapon;
     private IWeapon _secondaryWeapon;
@@ -31,6 +32,7 @@ public class SpacecraftController : GameObjectController
         _spacecraftSimulation = spacecraftSimulation;
         _inputSystem = inputSystem;
         _transformAdapter = transformAdapter;
+        _positionTracker = spacecraftPosition;
 
         _inputSystem.MoveForwardEvent += OnMoveForward;
         _inputSystem.RotateLeftEvent += OnRotateLeft;
@@ -58,7 +60,9 @@ public class SpacecraftController : GameObjectController
             _spacecraftSimulation.AddForce(_transformAdapter.lookDirection * 0.5f);
         }
 
-        _transformAdapter.position = _spacecraftSimulation.UpdatePosition(_transformAdapter.position, dt);
+        Vector3 newPosition = _spacecraftSimulation.UpdatePosition(_transformAdapter.position, dt);
+        _positionTracker.InstantSpeed = newPosition - _transformAdapter.position;
+        _transformAdapter.position = newPosition;
     }
 
     private void OnMoveForward()

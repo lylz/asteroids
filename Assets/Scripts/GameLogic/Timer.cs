@@ -4,6 +4,7 @@ public class Timer
 {
     public UnityAction<Timer> TimerFinished = delegate { };
     public bool IsFinished { get => _isFinished; }
+    public float RemainingTime { get => _remainingTime; }
 
     private bool _isFinished;
     private float _remainingTime;
