@@ -70,7 +70,7 @@ public class SpawnManager : ISpawnManager
     private void SpawnAsteroid()
     {
         Vector3 position = GetSpawnPosition();
-        Quaternion rotation = Quaternion.AngleAxis(Random.Range(0, 180), new Vector3(0, 0, 1));
+        Quaternion rotation = Quaternion.AngleAxis(Random.Range(0, 180), Vector3.forward);
 
         // TODO: get the IAsteroidConfig from outside
         _spawnEvents.InvokeAsteroidSpawned(null, position, rotation);

@@ -22,19 +22,18 @@ public class AsteroidController : GameObjectController
         _spawnEvents = spawnEvents;
         _asteroidEvents = asteroidEvents;
         _asteroid = asteroid;
+        _transformAdapter = transformAdapter;
         _velocity = GenerateVelocity(_asteroid.GetAsteroidConfig().Speed);
         _rotationAngle = _asteroid.GetAsteroidConfig().RotationAngle;
-        _transformAdapter = transformAdapter;
 
         GameController.GetInstance().Asteroids.Add(_asteroid);
     }
 
     private Vector3 GenerateVelocity(float speed)
     {
-        float angle = Random.Range(0, 180);
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector3 direction = _transformAdapter.rotation * new Vector3(1, 1, 0);
 
-        return rotation * new Vector3(1, 1, 0) * Mathf.Abs(speed);
+        return direction * Mathf.Abs(speed);
     }
 
     public override void FixedUpdate(float dt)
@@ -64,14 +63,24 @@ public class AsteroidController : GameObjectController
 
         if (asteroidConfig.SpawnCount > 0 && asteroidConfig.SpawnAsteroidConfig != null)
         {
+            // asteroid pieces gets spawned on the equal distance from each other
+            // around the asteroid death point
+            float directionAngle = 360 / asteroidConfig.SpawnCount; // get an angle for each asteroid piece
+
             for (int i = 0; i < asteroidConfig.SpawnCount; i++)
             {
-                // TODO: improve position picking
-                Vector3 position = _transformAdapter.position - new Vector3(1 + i, 1 + i, 0);
-                Quaternion rotation = Quaternion.identity;
-
-                _spawnEvents.InvokeAsteroidSpawned(asteroidConfig.SpawnAsteroidConfig, position, rotation);
+                SpawnAsteroidPiece(asteroidConfig, directionAngle * i);
             }
         }
+    }
+
+    private void SpawnAsteroidPiece(IAsteroidConfig asteroidConfig, float directionAngle)
+    {
+        float currentAngle = _transformAdapter.rotation.eulerAngles.z;
+        Quaternion rotation = Quaternion.AngleAxis(currentAngle + directionAngle, Vector3.forward);
+        Vector3 direction = rotation * new Vector3(1, 1, 0);
+        Vector3 position = _transformAdapter.position + direction.normalized / 2; // dividing by 2 to get pieces closer to the center
+
+        _spawnEvents.InvokeAsteroidSpawned(asteroidConfig.SpawnAsteroidConfig, position, rotation);
     }
 }
