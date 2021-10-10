@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public abstract class BaseControllableBehavior<TController> : MonoBehaviour, ITransformAdapter where TController : IGameObjectController
+public abstract class ControllableBehavior : MonoBehaviour, ITransformAdapter
 {
-    public abstract TController Controller { get; }
+    public abstract IGameObjectController Controller { get; }
 
     // TODO: move it somewhere
     protected Vector2 _screenBounds;

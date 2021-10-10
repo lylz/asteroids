@@ -1,4 +1,4 @@
-public interface IAsteroid
+public interface IAsteroid : IEnemy
 {
     public int GetId();
 

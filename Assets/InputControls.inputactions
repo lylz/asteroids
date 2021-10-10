@@ -11,7 +11,7 @@
                     "id": "4cbaac80-5c9f-4743-8998-07f6f3d8e353",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 },
                 {
                     "name": "RotateRight",
@@ -19,7 +19,7 @@
                     "id": "0e2fe51d-bfa4-4aa2-b682-3dc94b523643",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 },
                 {
                     "name": "RotateLeft",
@@ -27,7 +27,7 @@
                     "id": "9c151dcf-d331-4467-bd4a-74cec032f61d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 },
                 {
                     "name": "FirePrimary",
@@ -35,7 +35,7 @@
                     "id": "ada86817-1eae-4d05-bdba-451f3ed9d702",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
                 },
                 {
                     "name": "FireSecondary",
@@ -43,7 +43,7 @@
                     "id": "2e897ac0-d71d-4bf3-a832-fd64a7a0a246",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -99,6 +99,33 @@
                     "processors": "",
                     "groups": "",
                     "action": "FireSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Menu",
+            "id": "dacb3ac6-2f26-4eaf-ad8b-a7c9dc59e554",
+            "actions": [
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "d1f50e94-f1c9-4c1c-a606-fd8a3b511fa6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0ac84ad1-4fdd-4729-84e1-d6cf631d9ce1",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

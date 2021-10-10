@@ -81,6 +81,7 @@ public class AsteroidController : GameObjectController
         Vector3 direction = rotation * new Vector3(1, 1, 0);
         Vector3 position = _transformAdapter.position + direction.normalized / 2; // dividing by 2 to get pieces closer to the center
 
-        _spawnEvents.InvokeAsteroidSpawned(asteroidConfig.SpawnAsteroidConfig, position, rotation);
+        // TODO: handle this!
+        // _spawnEvents.InvokeAsteroidSpawned(asteroidConfig.SpawnAsteroidConfig, position, rotation);
     }
 }

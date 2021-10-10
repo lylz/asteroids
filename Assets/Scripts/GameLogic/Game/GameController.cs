@@ -27,3 +27,12 @@ public class GameController : IGameController
     private List<IUFO> _ufos = new List<IUFO>();
     public List<IUFO> UFOs { get => _ufos; }
 }
+
+public interface IGameController1
+{
+    public void AddAsteroid(IAsteroid asteroid);
+    public void RemoveAsteroid(IAsteroid asteroid);
+
+    public void AddUFO(IUFO ufo);
+    public void RemoveUFO(IUFO ufo);
+}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spacecraft : BaseControllableBehavior<SpacecraftController>
+public class Spacecraft : ControllableBehavior
 {
     public SpacecraftSimulationProperties SpacecraftSimulationProperties;
     public SpacecraftPositionTracker SpacecraftPosition; // TODO: check it
@@ -17,7 +17,7 @@ public class Spacecraft : BaseControllableBehavior<SpacecraftController>
     private SpacecraftController _spacecraftController;
     private WeaponSlotBehavior[] _weaponSlots;
 
-    public override SpacecraftController Controller => _spacecraftController;
+    public override IGameObjectController Controller => _spacecraftController;
 
     protected override void Start()
     {
@@ -58,5 +58,10 @@ public class Spacecraft : BaseControllableBehavior<SpacecraftController>
     private void OnPlayerDied()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerEvents.PlayerDied -= OnPlayerDied;
     }
 }

@@ -4,16 +4,16 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Game/Game Events/Spawn Event")]
 public class SpawnEvents : ScriptableObject, ISpawnEvents
 {
-    public event UnityAction<IAsteroidConfig, Vector3, Quaternion> AsteroidSpawned = delegate {};
-    public event UnityAction<Vector3, Quaternion> UFOSpawned = delegate {};
+    public event UnityAction<IAsteroid, Vector3, Quaternion> AsteroidSpawned = delegate {};
+    public event UnityAction<IUFO, Vector3, Quaternion> UFOSpawned = delegate {};
 
-    public void InvokeAsteroidSpawned(IAsteroidConfig config, Vector3 position, Quaternion rotation)
+    public void InvokeAsteroidSpawned(IAsteroid asteroid, Vector3 position, Quaternion rotation)
     {
-        AsteroidSpawned.Invoke(config, position, rotation);
+        AsteroidSpawned.Invoke(asteroid, position, rotation);
     }
 
-    public void InvokeUFOSpawned(Vector3 position, Quaternion rotation)
+    public void InvokeUFOSpawned(IUFO ufo, Vector3 position, Quaternion rotation)
     {
-        UFOSpawned.Invoke(position, rotation);
+        UFOSpawned.Invoke(ufo, position, rotation);
     }
 }

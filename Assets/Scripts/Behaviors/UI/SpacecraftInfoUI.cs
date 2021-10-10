@@ -15,6 +15,24 @@ public class SpacecraftInfoUI : MonoBehaviour
     [Header("Other")]
     public SpacecraftPositionTracker SpacecraftPositionTracker;
     public LaserInfoTracker LaserInfoTracker;
+    public PlayerEvents PlayerEvents;
+    public GameEvents GameEvents;
+
+    private void Start()
+    {
+        PlayerEvents.PlayerDied += Hide;
+        GameEvents.GameStarted += Open;
+    }
+
+    private void Open()
+    {
+        InfoUIContainer.SetActive(true);
+    }
+
+    private void Hide()
+    {
+        InfoUIContainer.SetActive(false);
+    }
 
     private void Update()
     {

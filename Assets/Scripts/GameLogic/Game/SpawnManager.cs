@@ -1,92 +1,107 @@
-using System.Collections;
 using UnityEngine;
 
 public interface ISpawnManager
 {
-    public IEnumerator[] GetSpawnCoroutines();
+    public void Start();
+    public int GetCurrentWaveIndex();
 }
 
 public class SpawnManager : ISpawnManager
 {
     private Vector2 _screenBounds;
     private ISpawnEvents _spawnEvents;
+    private ISpawnWave[] _spawnWaves;
 
-    private uint _asteroidsToSpawn;
-    private uint _ufoToSpawn;
+    private int _currentWaveIndex;
 
     public SpawnManager(
-        uint asteroidsToSpawn,
-        uint ufoToSpawn,
-        Vector2 screenBounds,
-        ISpawnEvents spawnEvents
+        ISpawnWave[] spawnWaves,
+        ISpawnEvents spawnEvents,
+        Vector2 screenBounds
     )
     {
-        _asteroidsToSpawn = asteroidsToSpawn;
-        _ufoToSpawn = ufoToSpawn;
-        _screenBounds = screenBounds; // TODO: need to multiply coordinates by 2
+        _spawnWaves = spawnWaves;
         _spawnEvents = spawnEvents;
+        _screenBounds = screenBounds * 2; // TODO: check it
+        _currentWaveIndex = 0;
     }
 
-    // TODO: use Timer instead
-    public IEnumerator[] GetSpawnCoroutines()
+    public void Start()
     {
-        return new IEnumerator[] { SpawnAsteroidsRoutine(), SpawnUFOsRoutine() };
+        SpawnCurrentWaveEntries();
     }
 
-    private IEnumerator SpawnAsteroidsRoutine()
+    public int GetCurrentWaveIndex()
     {
-        for (;;)
+        return _currentWaveIndex;
+    }
+
+    private void SpawnNextWave()
+    {
+        if (_currentWaveIndex < _spawnWaves.Length - 1)
         {
-            if (GameController.GetInstance().Asteroids.Count == 0)
+            _currentWaveIndex++;
+        }
+
+        // SpawnWave();
+    }
+
+    private void SpawnCurrentWaveEntries()
+    {
+        ISpawnWave currentWave = GetCurrentWave();
+
+        if (currentWave == null)
+        {
+            return; // TODO: handle
+        }
+
+        foreach (ISpawnWaveEntry spawnWaveEntry in currentWave.SpawnWaveEntries)
+        {
+            for (int i = 0; i < spawnWaveEntry.Count; i++)
             {
-                SpawnAsteroids();
+                // TODO: use InitialSpawnDelayInSeconds
+                if (spawnWaveEntry.Enemy is IAsteroid)
+                {
+                    SpawnAsteroid(spawnWaveEntry.Enemy as IAsteroid);
+                }
+                else if (spawnWaveEntry.Enemy is IUFO)
+                {
+                    SpawnUFO(spawnWaveEntry.Enemy as IUFO);
+                }
+                else
+                {
+                    // TODO: throw error
+                }
             }
-
-            yield return new WaitForSeconds(1.0f);
         }
     }
 
-    private IEnumerator SpawnUFOsRoutine()
+    private ISpawnWave GetCurrentWave()
     {
-        for (;;)
+        if (_spawnWaves.Length == 0)
         {
-            if (GameController.GetInstance().UFOs.Count == 0)
-            {
-                SpawnUFOs();
-            }
-
-            yield return new WaitForSeconds(1.0f);
+            return null;
         }
+
+        if (_currentWaveIndex > _spawnWaves.Length - 1)
+        {
+            _currentWaveIndex = _spawnWaves.Length - 1;
+        }
+
+        return _spawnWaves[_currentWaveIndex];
     }
 
-    private void SpawnAsteroids()
-    {
-        for (int i = 0; i < _asteroidsToSpawn; i++)
-        {
-            SpawnAsteroid();
-        }
-    }
-
-    private void SpawnAsteroid()
+    private void SpawnAsteroid(IAsteroid asteroid)
     {
         Vector3 position = GetSpawnPosition();
         Quaternion rotation = Quaternion.AngleAxis(Random.Range(0, 180), Vector3.forward);
 
-        // TODO: get the IAsteroidConfig from outside
-        _spawnEvents.InvokeAsteroidSpawned(null, position, rotation);
+        _spawnEvents.InvokeAsteroidSpawned(asteroid, position, rotation);
     }
 
-    private void SpawnUFOs()
+    private void SpawnUFO(IUFO ufo)
     {
-        for (int i = 0; i < _ufoToSpawn; i++)
-        {
-            SpawnUFO();
-        }
-    }
-
-    private void SpawnUFO()
-    {
-        _spawnEvents.InvokeUFOSpawned(GetSpawnPosition(), Quaternion.identity);
+        _spawnEvents.InvokeUFOSpawned(ufo, GetSpawnPosition(), Quaternion.identity);
     }
 
     private Vector3 GetSpawnPosition()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UFO : BaseControllableBehavior<UFOController>, IUFO
+public class UFO : Enemy, IUFO
 {
     public UFOEvents UFOEvents;
 
@@ -12,7 +12,7 @@ public class UFO : BaseControllableBehavior<UFOController>, IUFO
 
     private UFOController _ufoController;
 
-    public override UFOController Controller => _ufoController;
+    public override IGameObjectController Controller => _ufoController;
 
     protected override void Awake()
     {

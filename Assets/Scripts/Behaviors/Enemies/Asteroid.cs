@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Asteroid : BaseControllableBehavior<AsteroidController>, IAsteroid
+public class Asteroid : Enemy, IAsteroid
 {
     public SpawnEvents SpawnEvents;
     public AsteroidEvents AsteroidEvents;
@@ -8,7 +8,7 @@ public class Asteroid : BaseControllableBehavior<AsteroidController>, IAsteroid
 
     private AsteroidController _asteroidController;
 
-    public override AsteroidController Controller => _asteroidController;
+    public override IGameObjectController Controller => _asteroidController;
 
     protected override void Start()
     {
