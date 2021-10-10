@@ -124,5 +124,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UFOEvents: {fileID: 11400000, guid: 87309ca2554e9944d9573a64a9558d8b, type: 2}
-  _speed: 2
-  _spacecraftPosition: {fileID: 11400000, guid: 7be0bad4e9c50334e8c3d137adf88096, type: 2}
+  Speed: 2
+  SpacecraftPositionTracker: {fileID: 11400000, guid: 7be0bad4e9c50334e8c3d137adf88096, type: 2}
