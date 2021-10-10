@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameEvents: {fileID: 11400000, guid: 719540af5840b4b448e638fcf3b51e3f, type: 2}
-  SpawnEvents: {fileID: 11400000, guid: 03e6bbdc5942eb947b1fad2b16ce9026, type: 2}
+  EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}
   SpawnWaves:
   - {fileID: 11400000, guid: a78d2b49c707cb547a4e7837104b8bae, type: 2}
   - {fileID: 11400000, guid: ef81160f72f7a194a8516675f436868d, type: 2}

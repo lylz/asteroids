@@ -8,7 +8,7 @@ public class SpawnManager : ISpawnManager
 {
     private Vector2 _screenBounds;
     private IGameEvents _gameEvents;
-    private ISpawnEvents _spawnEvents;
+    private IEnemyEvents _enemyEvents;
     private ISpawnWave[] _spawnWaves;
 
     private int _currentWaveIndex;
@@ -16,28 +16,19 @@ public class SpawnManager : ISpawnManager
     public SpawnManager(
         IGameEvents gameEvents,
         ISpawnWave[] spawnWaves,
-        ISpawnEvents spawnEvents,
+        IEnemyEvents enemyEvents,
         Vector2 screenBounds
     )
     {
         _gameEvents = gameEvents;
         _spawnWaves = spawnWaves;
-        _spawnEvents = spawnEvents;
+        _enemyEvents = enemyEvents;
         _screenBounds = screenBounds * 2; // TODO: check it
         _currentWaveIndex = 0;
-
-        _gameEvents.GameStarted += Start;
-        Debug.Log("SpawnManager Constructor");
-    }
-
-    ~SpawnManager()
-    {
-        _gameEvents.GameStarted -= Start;
     }
 
     private void Start()
     {
-        Debug.Log("Spawn");
         SpawnCurrentWaveEntries();
     }
 
@@ -101,12 +92,12 @@ public class SpawnManager : ISpawnManager
         Vector3 position = GetSpawnPosition();
         Quaternion rotation = Quaternion.AngleAxis(Random.Range(0, 180), Vector3.forward);
 
-        _spawnEvents.InvokeAsteroidSpawned(asteroid, position, rotation);
+        _enemyEvents.InvokeEnemySpawned(asteroid, position, rotation);
     }
 
     private void SpawnUFO(IUFO ufo)
     {
-        _spawnEvents.InvokeUFOSpawned(ufo, GetSpawnPosition(), Quaternion.identity);
+        _enemyEvents.InvokeEnemySpawned(ufo, GetSpawnPosition(), Quaternion.identity);
     }
 
     private Vector3 GetSpawnPosition()

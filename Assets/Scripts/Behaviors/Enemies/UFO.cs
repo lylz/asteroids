@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UFO : Enemy, IUFO
 {
-    public UFOEvents UFOEvents;
+    public EnemyEvents EnemyEvents;
     public float Speed;
     public SpacecraftPositionTracker SpacecraftPositionTracker;
 
@@ -15,8 +15,7 @@ public class UFO : Enemy, IUFO
         base.Start();
 
         _ufoController = new UFOController(
-            GameManager.Instance.GameController,
-            UFOEvents,
+            EnemyEvents,
             this,
             Speed,
             SpacecraftPositionTracker,
@@ -24,7 +23,7 @@ public class UFO : Enemy, IUFO
             this
         );
 
-        UFOEvents.UFODestroyed += OnUFODestroyed;
+        EnemyEvents.EnemyDestroyed += OnUFODestroyed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,8 +31,15 @@ public class UFO : Enemy, IUFO
         _ufoController.Hit(collision);
     }
 
-    private void OnUFODestroyed(IUFO ufo)
+    private void OnUFODestroyed(IEnemy enemy)
     {
+        if (!(enemy is UFO))
+        {
+            return;
+        }
+
+        UFO ufo = enemy as UFO;
+
         if (GetInstanceID() == ufo.GetId())
         {
             Destroy(gameObject);

@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Asteroid : Enemy, IAsteroid
 {
-    public SpawnEvents SpawnEvents;
-    public AsteroidEvents AsteroidEvents;
+    public EnemyEvents EnemyEvents;
     public AsteroidConfig AsteroidConfig;
 
     private AsteroidController _asteroidController;
@@ -15,15 +14,13 @@ public class Asteroid : Enemy, IAsteroid
         base.Start();
 
         _asteroidController = new AsteroidController(
-            GameManager.Instance.GameController,
-            SpawnEvents,
-            AsteroidEvents,
+            EnemyEvents,
             this,
             _screenBounds,
             this
         );
-        AsteroidEvents.AsteroidDestroyed += OnAsteroidDestroyed;
-
+        
+        EnemyEvents.EnemyDestroyed += OnAsteroidDestroyed;
         Scale();
     }
 
@@ -39,8 +36,15 @@ public class Asteroid : Enemy, IAsteroid
         _asteroidController.Hit(collision);
     }
 
-    private void OnAsteroidDestroyed(IAsteroid asteroid)
+    private void OnAsteroidDestroyed(IEnemy enemy)
     {
+        if (!(enemy is Asteroid))
+        {
+            return;
+        }
+
+        Asteroid asteroid = enemy as Asteroid;
+
         if (GetInstanceID() != asteroid.GetId())
         {
             return;

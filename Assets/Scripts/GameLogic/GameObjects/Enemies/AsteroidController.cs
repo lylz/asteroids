@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class AsteroidController : GameObjectController
 {
-    private IGameController _gameController;
-
-    private ISpawnEvents _spawnEvents;
-    private IAsteroidEvents _asteroidEvents;
+    private IEnemyEvents _enemyEvents;
 
     private IAsteroid _asteroid;
     private Vector3 _velocity;
@@ -13,24 +10,18 @@ public class AsteroidController : GameObjectController
     private ITransformAdapter _transformAdapter;
 
     public AsteroidController(
-        IGameController gameController,
-        ISpawnEvents spawnEvents,
-        IAsteroidEvents asteroidEvents,
+        IEnemyEvents enemyEvents,
         IAsteroid asteroid,
         Vector2 screenBounds,
         ITransformAdapter transformAdapter
     )
         : base(new IPostUpdateProcessor[] { new PortalPostUpdateProcessor(screenBounds, transformAdapter) })
     {
-        _gameController = gameController;
-        _spawnEvents = spawnEvents;
-        _asteroidEvents = asteroidEvents;
+        _enemyEvents = enemyEvents;
         _asteroid = asteroid;
         _transformAdapter = transformAdapter;
         _velocity = GenerateVelocity(_asteroid.GetAsteroidConfig().Speed);
         _rotationAngle = _asteroid.GetAsteroidConfig().RotationAngle;
-
-        _gameController.Enemies.Add(_asteroid);
     }
 
     private Vector3 GenerateVelocity(float speed)
@@ -56,8 +47,7 @@ public class AsteroidController : GameObjectController
 
     private void Die()
     {
-        _gameController.Enemies.Remove(_asteroid);
-        _asteroidEvents.InvokeAsteroidDestroyed(_asteroid);
+        _enemyEvents.InvokeEnemyDestroyed(_asteroid);
         SpawnAsteroidPieces();
     }
 
@@ -85,6 +75,6 @@ public class AsteroidController : GameObjectController
         Vector3 direction = rotation * new Vector3(1, 1, 0);
         Vector3 position = _transformAdapter.position + direction.normalized / 2; // dividing by 2 to get pieces closer to the center
 
-        _spawnEvents.InvokeAsteroidSpawned(asteroid, position, rotation);
+        _enemyEvents.InvokeEnemySpawned(asteroid, position, rotation);
     }
 }

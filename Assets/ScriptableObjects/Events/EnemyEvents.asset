@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 663e20c8776bea84e8d64d0472fd210c, type: 3}
-  m_Name: SpawnEvent
+  m_Script: {fileID: 11500000, guid: 24b4d3907bb923f428ce7ced508f6f9a, type: 3}
+  m_Name: EnemyEvents
   m_EditorClassIdentifier: 

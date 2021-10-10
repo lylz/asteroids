@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class UFOController : GameObjectController 
 {
-    private IGameController _gameController;
-    private IUFOEvents _ufoEvents;
+    private IEnemyEvents _enemyEvents;
     private IUFO _ufo;
     private float _speed;
     private ISpacecraftPositionTracker _spacecraftPosition;
@@ -11,8 +10,7 @@ public class UFOController : GameObjectController
 
     // TODO: screen bounds can be moved to the scriptable object?!
     public UFOController(
-        IGameController gameController,
-        IUFOEvents ufoEvents,
+        IEnemyEvents enemyEvents,
         IUFO ufo,
         float speed,
         ISpacecraftPositionTracker spacecraftPosition,
@@ -21,14 +19,11 @@ public class UFOController : GameObjectController
     )
         : base(new IPostUpdateProcessor[] { new PortalPostUpdateProcessor(screenBounds, transformAdapter) })
     {
-        _gameController = gameController;
-        _ufoEvents = ufoEvents;
+        _enemyEvents = enemyEvents;
         _ufo = ufo;
         _speed = speed;
         _spacecraftPosition = spacecraftPosition;
         _transformAdapter = transformAdapter;
-
-        _gameController.Enemies.Add(_ufo);
     }
 
     public override void FixedUpdate(float dt)
@@ -49,7 +44,6 @@ public class UFOController : GameObjectController
 
     private void Die()
     {
-        _gameController.Enemies.Remove(_ufo);
-        _ufoEvents.InvokeUFODestroyed(_ufo);
+        _enemyEvents.InvokeEnemyDestroyed(_ufo);
     }
 }

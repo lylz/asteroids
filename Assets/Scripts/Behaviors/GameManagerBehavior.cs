@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManagerBehavior : MonoBehaviour
 {
-    public static GameManager Instance;
-    
     public GameEvents GameEvents;
 
     private GameController _gameController;
@@ -11,14 +9,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogWarning("Only one instance of the GameManager should be present in the scene!");
-            return;
-        }
-
         _gameController = new GameController(GameEvents);
-        Instance = this;
     }
 
     private void Start()
