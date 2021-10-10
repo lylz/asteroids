@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6765589067554828443}
   - component: {fileID: 5805385403075648533}
   m_Layer: 0
-  m_Name: Asteroid
+  m_Name: AsteroidBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,3 +126,4 @@ MonoBehaviour:
   SpawnEvents: {fileID: 11400000, guid: 03e6bbdc5942eb947b1fad2b16ce9026, type: 2}
   AsteroidEvents: {fileID: 11400000, guid: c98ba47b789d952469da9995926ae846, type: 2}
   AsteroidConfig: {fileID: 11400000, guid: f9079731d570b2e4fa2e6a8686290b95, type: 2}
+  AsteroidPiecePrefab: {fileID: 5805385403075648533}

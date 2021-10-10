@@ -4,5 +4,5 @@ public interface IAsteroidConfig
     public float Speed { get; }
     public float RotationAngle { get; }
     public uint SpawnCount { get; }
-    public IAsteroidConfig SpawnAsteroidConfig { get; }
+    public IAsteroid SpawnAsteroidPrefab { get; }
 }

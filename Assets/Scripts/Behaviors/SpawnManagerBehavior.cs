@@ -30,14 +30,6 @@ public class SpawnManagerBehavior : MonoBehaviour
         {
             Instantiate(asteroid as Asteroid, position, rotation);
         }
-        /*
-        Asteroid asteroid = Instantiate(currentWave.AsteroidPrefab, position, rotation);
-
-        // TODO: handle this!
-        if (config != null && config is AsteroidConfig)
-        {
-            asteroid.AsteroidConfig = config as AsteroidConfig;
-        }*/
     }
 
     private void OnUFOSpawned(IUFO ufo, Vector3 position, Quaternion rotation)

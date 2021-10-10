@@ -75,4 +75,10 @@ public class SpacecraftInfoUI : MonoBehaviour
     {
         LaserRechargeTime.text = LaserInfoTracker.RechargeTime.ToString("0.00");
     }
+
+    private void OnDestroy()
+    {
+        PlayerEvents.PlayerDied -= Hide;
+        GameEvents.GameStarted -= Open;
+    }
 }

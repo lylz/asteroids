@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdf7e9706c992814e8c0cf65ef9bd2cd, type: 3}
-  m_Name: BigAsteroid
+  m_Name: AsteroidMedium
   m_EditorClassIdentifier: 
-  scale: 1.5
-  speed: 1
-  rotationAngle: 35
+  scale: 1
+  speed: 1.25
+  rotationAngle: 45
   spawnCount: 2
-  spawnAsteroidConfig: {fileID: 11400000, guid: 8060b731a8880794ca6a2869aba9ba6f, type: 2}
+  spawnAsteroidPrefab: {fileID: 2721595261765938579, guid: 251a9e82e1462f94ea73742e8f72ca6a, type: 3}

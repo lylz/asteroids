@@ -61,7 +61,7 @@ public class AsteroidController : GameObjectController
     {
         IAsteroidConfig asteroidConfig = _asteroid.GetAsteroidConfig();
 
-        if (asteroidConfig.SpawnCount > 0 && asteroidConfig.SpawnAsteroidConfig != null)
+        if (asteroidConfig.SpawnCount > 0 && asteroidConfig.SpawnAsteroidPrefab != null)
         {
             // asteroid pieces gets spawned on the equal distance from each other
             // around the asteroid death point
@@ -69,19 +69,18 @@ public class AsteroidController : GameObjectController
 
             for (int i = 0; i < asteroidConfig.SpawnCount; i++)
             {
-                SpawnAsteroidPiece(asteroidConfig, directionAngle * i);
+                SpawnAsteroidPiece(asteroidConfig.SpawnAsteroidPrefab, directionAngle * i);
             }
         }
     }
 
-    private void SpawnAsteroidPiece(IAsteroidConfig asteroidConfig, float directionAngle)
+    private void SpawnAsteroidPiece(IAsteroid asteroid, float directionAngle)
     {
         float currentAngle = _transformAdapter.rotation.eulerAngles.z;
         Quaternion rotation = Quaternion.AngleAxis(currentAngle + directionAngle, Vector3.forward);
         Vector3 direction = rotation * new Vector3(1, 1, 0);
         Vector3 position = _transformAdapter.position + direction.normalized / 2; // dividing by 2 to get pieces closer to the center
 
-        // TODO: handle this!
-        // _spawnEvents.InvokeAsteroidSpawned(asteroidConfig.SpawnAsteroidConfig, position, rotation);
+        _spawnEvents.InvokeAsteroidSpawned(asteroid, position, rotation);
     }
 }

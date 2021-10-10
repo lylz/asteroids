@@ -15,6 +15,6 @@ public class AsteroidConfig : ScriptableObject, IAsteroidConfig
     public uint spawnCount;
     public uint SpawnCount { get => spawnCount; }
 
-    public AsteroidConfig spawnAsteroidConfig;
-    public IAsteroidConfig SpawnAsteroidConfig { get => spawnAsteroidConfig; }
+    public Asteroid spawnAsteroidPrefab;
+    public IAsteroid SpawnAsteroidPrefab { get => spawnAsteroidPrefab; }
 }
