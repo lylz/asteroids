@@ -14,7 +14,7 @@ public class GameOverUI : MonoBehaviour
     public GameEvents GameEvents;
     public InputControlsSystem InputControlsSystem;
 
-    [Header("Restart Text Animation")]
+    [Header("RestartText Animation")]
     public float BlinkStepInSeconds = 0.5f;
 
     private void Start()
@@ -47,5 +47,11 @@ public class GameOverUI : MonoBehaviour
         GameOverUIContainer.SetActive(false);
         StopAllCoroutines();
         GameEvents.InvokeGameStarted();
+    }
+
+    private void OnDestroy()
+    {
+        PlayerEvents.PlayerDied -= Open;
+        InputControlsSystem.MenuStartEvent -= Restart;
     }
 }

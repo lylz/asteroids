@@ -3,26 +3,23 @@ using UnityEngine;
 public class UFO : Enemy, IUFO
 {
     public UFOEvents UFOEvents;
-
-    [SerializeField]
-    private float _speed;
-
-    [SerializeField]
-    private SpacecraftPositionTracker _spacecraftPosition;
+    public float Speed;
+    public SpacecraftPositionTracker SpacecraftPositionTracker;
 
     private UFOController _ufoController;
 
     public override IGameObjectController Controller => _ufoController;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
 
         _ufoController = new UFOController(
+            GameManager.Instance.GameController,
             UFOEvents,
             this,
-            _speed,
-            _spacecraftPosition,
+            Speed,
+            SpacecraftPositionTracker,
             _screenBounds,
             this
         );

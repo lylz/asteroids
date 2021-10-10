@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AsteroidController : GameObjectController
 {
+    private IGameController _gameController;
+
     private ISpawnEvents _spawnEvents;
     private IAsteroidEvents _asteroidEvents;
 
@@ -11,6 +13,7 @@ public class AsteroidController : GameObjectController
     private ITransformAdapter _transformAdapter;
 
     public AsteroidController(
+        IGameController gameController,
         ISpawnEvents spawnEvents,
         IAsteroidEvents asteroidEvents,
         IAsteroid asteroid,
@@ -19,6 +22,7 @@ public class AsteroidController : GameObjectController
     )
         : base(new IPostUpdateProcessor[] { new PortalPostUpdateProcessor(screenBounds, transformAdapter) })
     {
+        _gameController = gameController;
         _spawnEvents = spawnEvents;
         _asteroidEvents = asteroidEvents;
         _asteroid = asteroid;
@@ -26,7 +30,7 @@ public class AsteroidController : GameObjectController
         _velocity = GenerateVelocity(_asteroid.GetAsteroidConfig().Speed);
         _rotationAngle = _asteroid.GetAsteroidConfig().RotationAngle;
 
-        GameController.GetInstance().Asteroids.Add(_asteroid);
+        _gameController.Enemies.Add(_asteroid);
     }
 
     private Vector3 GenerateVelocity(float speed)
@@ -52,7 +56,7 @@ public class AsteroidController : GameObjectController
 
     private void Die()
     {
-        GameController.GetInstance().Asteroids.Remove(_asteroid);
+        _gameController.Enemies.Remove(_asteroid);
         _asteroidEvents.InvokeAsteroidDestroyed(_asteroid);
         SpawnAsteroidPieces();
     }

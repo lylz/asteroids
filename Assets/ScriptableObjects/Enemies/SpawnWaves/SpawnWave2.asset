@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42f4afedc6cdaf44692f0b9a30a4a6d0, type: 3}
-  m_Name: SpawnWave1
+  m_Name: SpawnWave2
   m_EditorClassIdentifier: 
   spawnWaveEntries:
   - enemy: {fileID: 5805385403075648533, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
-    count: 4
+    count: 6
     initialSpawnDelayInSeconds: 0
   - enemy: {fileID: 4554977861145465802, guid: ee05c2c09e1ad1742b699818767d429d, type: 3}
     count: 2
-    initialSpawnDelayInSeconds: 0
+    initialSpawnDelayInSeconds: 3

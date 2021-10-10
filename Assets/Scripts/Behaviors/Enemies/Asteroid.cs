@@ -14,7 +14,14 @@ public class Asteroid : Enemy, IAsteroid
     {
         base.Start();
 
-        _asteroidController = new AsteroidController(SpawnEvents, AsteroidEvents, this, _screenBounds, this);
+        _asteroidController = new AsteroidController(
+            GameManager.Instance.GameController,
+            SpawnEvents,
+            AsteroidEvents,
+            this,
+            _screenBounds,
+            this
+        );
         AsteroidEvents.AsteroidDestroyed += OnAsteroidDestroyed;
 
         Scale();

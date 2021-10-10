@@ -1148,11 +1148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf0ae3301e7c3e44af1848a8079720e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AsteroidsSpawnIntervalInSeconds: 1
-  UFOSpawnIntervalInSeconds: 1
+  GameEvents: {fileID: 11400000, guid: 719540af5840b4b448e638fcf3b51e3f, type: 2}
   SpawnEvents: {fileID: 11400000, guid: 03e6bbdc5942eb947b1fad2b16ce9026, type: 2}
   SpawnWaves:
   - {fileID: 11400000, guid: a78d2b49c707cb547a4e7837104b8bae, type: 2}
+  - {fileID: 11400000, guid: ef81160f72f7a194a8516675f436868d, type: 2}
 --- !u!4 &1004037057
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,6 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8814e40c6859d0e4099668cf377b9d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameEvents: {fileID: 11400000, guid: 719540af5840b4b448e638fcf3b51e3f, type: 2}
 --- !u!1 &1148861823
 GameObject:
   m_ObjectHideFlags: 0

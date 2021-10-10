@@ -2,38 +2,43 @@ using UnityEngine;
 
 public interface ISpawnManager
 {
-    public void Start();
-    public int GetCurrentWaveIndex();
 }
 
 public class SpawnManager : ISpawnManager
 {
     private Vector2 _screenBounds;
+    private IGameEvents _gameEvents;
     private ISpawnEvents _spawnEvents;
     private ISpawnWave[] _spawnWaves;
 
     private int _currentWaveIndex;
 
     public SpawnManager(
+        IGameEvents gameEvents,
         ISpawnWave[] spawnWaves,
         ISpawnEvents spawnEvents,
         Vector2 screenBounds
     )
     {
+        _gameEvents = gameEvents;
         _spawnWaves = spawnWaves;
         _spawnEvents = spawnEvents;
         _screenBounds = screenBounds * 2; // TODO: check it
         _currentWaveIndex = 0;
+
+        _gameEvents.GameStarted += Start;
+        Debug.Log("SpawnManager Constructor");
     }
 
-    public void Start()
+    ~SpawnManager()
     {
+        _gameEvents.GameStarted -= Start;
+    }
+
+    private void Start()
+    {
+        Debug.Log("Spawn");
         SpawnCurrentWaveEntries();
-    }
-
-    public int GetCurrentWaveIndex()
-    {
-        return _currentWaveIndex;
     }
 
     private void SpawnNextWave()

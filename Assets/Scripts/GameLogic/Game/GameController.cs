@@ -2,37 +2,23 @@ using System.Collections.Generic;
 
 public interface IGameController
 {
-    public List<IAsteroid> Asteroids { get; }
-    public List<IUFO> UFOs { get; }
+    public List<IEnemy> Enemies { get; }
 }
 
 public class GameController : IGameController
 {
-    #region Singleton
+    private List<IEnemy> _enemies = new List<IEnemy>();
+    public List<IEnemy> Enemies { get => _enemies; }
 
-    private static GameController _instance = new GameController();
+    private IGameEvents _gameEvents;
 
-    private GameController() { }
-    
-    public static GameController GetInstance()
+    public GameController(IGameEvents gameEvents)
     {
-        return _instance;
+        _gameEvents = gameEvents;
     }
 
-    #endregion
-
-    private List<IAsteroid> _asteroids = new List<IAsteroid>();
-    public List<IAsteroid> Asteroids { get => _asteroids; }
-
-    private List<IUFO> _ufos = new List<IUFO>();
-    public List<IUFO> UFOs { get => _ufos; }
-}
-
-public interface IGameController1
-{
-    public void AddAsteroid(IAsteroid asteroid);
-    public void RemoveAsteroid(IAsteroid asteroid);
-
-    public void AddUFO(IUFO ufo);
-    public void RemoveUFO(IUFO ufo);
+    public void Start()
+    {
+        _gameEvents.InvokeGameStarted();
+    }
 }

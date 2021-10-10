@@ -1,23 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    #region Singleton
+    public static GameManager Instance;
+    
+    public GameEvents GameEvents;
 
-    public static GameManager instance;
+    private GameController _gameController;
+    public GameController GameController { get => _gameController; }
 
     private void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
-            Debug.LogWarning("Only one instance of GameManager should be present in the scene!");
+            Debug.LogWarning("Only one instance of the GameManager should be present in the scene!");
             return;
         }
 
-        instance = this;
+        _gameController = new GameController(GameEvents);
+        Instance = this;
     }
 
-    #endregion
+    private void Start()
+    {
+        _gameController.Start();
+    }
 }
