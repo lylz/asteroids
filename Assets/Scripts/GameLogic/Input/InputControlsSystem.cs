@@ -95,8 +95,20 @@ public class InputControlsSystem : ScriptableObject,
     public void EnableInput()
     {
         _inputControls.Gameplay.Enable();
-        _inputControls.Menu.Enable();
         _inputControls.Global.Enable();
+    }
+
+    public void EnableGameplayInput()
+    {
+        _inputControls.Gameplay.Enable();
+        _inputControls.Global.Enable();
+        _inputControls.Menu.Disable();
+    }
+
+    public void EnableMenuInput()
+    {
+        _inputControls.Menu.Enable();
+        _inputControls.Gameplay.Disable();
     }
 
     public void DisableInput()

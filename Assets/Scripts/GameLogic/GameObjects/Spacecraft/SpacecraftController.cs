@@ -59,12 +59,12 @@ public class SpacecraftController : GameObjectController
 
         if (_rotateLeft)
         {
-            _transformAdapter.rotation = _spacecraftSimulation.Rotate(_transformAdapter.rotation, 10.0f);
+            _transformAdapter.rotation = _spacecraftSimulation.RotateLeft(_transformAdapter.rotation);
         }
         
         if (_rotateRight)
         {
-            _transformAdapter.rotation = _spacecraftSimulation.Rotate(_transformAdapter.rotation, -10.0f);
+            _transformAdapter.rotation = _spacecraftSimulation.RotateRight(_transformAdapter.rotation);
         }
 
         if (_move)

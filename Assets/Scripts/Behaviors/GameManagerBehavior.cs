@@ -3,16 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerBehavior : MonoBehaviour
 {
-    public GameEvents GameEvents;
     public InputControlsSystem InputSystem;
 
     [Header("Score Manager")]
     public ScoreStorage ScoreStorage;
-    public PlayerEvents PlayerEvents;
 
     [Header("Spawn Manager")]
-    public EnemyEvents EnemyEvents;
     public SpawnWave[] SpawnWaves;
+
+    [Header("Events")]
+    public GameEvents GameEvents;
+    public PlayerEvents PlayerEvents;
+    public EnemyEvents EnemyEvents;
 
     private GameController _gameController;
     private SpawnManager _spawnManager;
@@ -22,7 +24,7 @@ public class GameManagerBehavior : MonoBehaviour
     {
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
-        _spawnManager = new SpawnManager(SpawnWaves, EnemyEvents, screenBounds);
+        _spawnManager = new SpawnManager(PlayerEvents, SpawnWaves, EnemyEvents, screenBounds);
         _gameController = new GameController(InputSystem, _spawnManager, GameEvents);
         _scoreManager = new ScoreManager(ScoreStorage, GameEvents, EnemyEvents, PlayerEvents);
 
@@ -32,6 +34,7 @@ public class GameManagerBehavior : MonoBehaviour
 
     private void Start()
     {
+        InputSystem.EnableGameplayInput();
         _gameController.Start();
     }
 

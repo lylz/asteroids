@@ -36,6 +36,7 @@ public class GameOverUI : MonoBehaviour
 
     private void Open()
     {
+        InputControlsSystem.EnableMenuInput();
         GameOverUIContainer.SetActive(true);
         StartCoroutine(RestartTextAnimation());
     }

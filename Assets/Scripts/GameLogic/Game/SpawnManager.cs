@@ -10,6 +10,9 @@ public class SpawnManager : ISpawnManager
 {
     private int _enemiesCount;
 
+    private Vector3 PlayerSpawnPosition = new Vector3(0, 0, 0);
+
+    private IPlayerEvents _playerEvents;
     private Vector2 _screenBounds;
     private IEnemyEvents _enemyEvents;
     private ISpawnWave[] _spawnWaves;
@@ -17,11 +20,13 @@ public class SpawnManager : ISpawnManager
     private int _currentWaveIndex;
 
     public SpawnManager(
+        IPlayerEvents playerEvents,
         ISpawnWave[] spawnWaves,
         IEnemyEvents enemyEvents,
         Vector2 screenBounds
     )
     {
+        _playerEvents = playerEvents;
         _spawnWaves = spawnWaves;
         _enemyEvents = enemyEvents;
         _screenBounds = screenBounds * 2; // TODO: check it
@@ -40,6 +45,8 @@ public class SpawnManager : ISpawnManager
 
     public void Start()
     {
+        SpawnPlayer();
+
         _currentWaveIndex = 0;
         SpawnCurrentWaveEntries();
     }
@@ -47,6 +54,11 @@ public class SpawnManager : ISpawnManager
     public void Update(float dt)
     {
 
+    }
+
+    private void SpawnPlayer()
+    {
+        _playerEvents.InvokePlayerSpawned(PlayerSpawnPosition);
     }
 
     private void CheckNextWave()
@@ -137,7 +149,24 @@ public class SpawnManager : ISpawnManager
 
     private Vector3 GetSpawnPosition()
     {
-        float x = Random.Range(-_screenBounds.x, _screenBounds.x);
+        float playerPadding = 10;
+        float side = Random.Range(0, 1);
+        float leftBoundX = 0;
+        float rightBoundX = 0;
+
+        // either spawn to the left of the player or to the right of the player
+        if (side == 0)
+        {
+            leftBoundX = -_screenBounds.x;
+            rightBoundX = PlayerSpawnPosition.x - playerPadding;
+        }
+        else
+        {
+            leftBoundX = PlayerSpawnPosition.x + playerPadding;
+            rightBoundX = _screenBounds.x;
+        }
+
+        float x = Random.Range(leftBoundX, rightBoundX);
         float y = Random.Range(-_screenBounds.y, _screenBounds.y);
 
         return new Vector3(x, y, 0);

@@ -287,7 +287,7 @@ RectTransform:
   - {fileID: 1126841760}
   - {fileID: 1960486678}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1661,6 +1661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf0ae3301e7c3e44af1848a8079720e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpacecraftPrefab: {fileID: 3297167309509306012, guid: af0148481e6b48f42bc034914d14e016, type: 3}
+  PlayerEvents: {fileID: 11400000, guid: 7e5de35913131454dbe06c2243ddbc7b, type: 2}
   EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}
 --- !u!4 &1004037057
 Transform:
@@ -1688,14 +1690,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8814e40c6859d0e4099668cf377b9d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameEvents: {fileID: 11400000, guid: 719540af5840b4b448e638fcf3b51e3f, type: 2}
   InputSystem: {fileID: 11400000, guid: 13cbcf4c18d02cc46a81e48aa5cf6831, type: 2}
   ScoreStorage: {fileID: 11400000, guid: 001b051a412c8774d80718819bdde04a, type: 2}
-  PlayerEvents: {fileID: 11400000, guid: 7e5de35913131454dbe06c2243ddbc7b, type: 2}
-  EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}
+  PlayerSpawnPosition: {x: 0, y: 0, z: 0}
   SpawnWaves:
   - {fileID: 11400000, guid: a78d2b49c707cb547a4e7837104b8bae, type: 2}
   - {fileID: 11400000, guid: ef81160f72f7a194a8516675f436868d, type: 2}
+  GameEvents: {fileID: 11400000, guid: 719540af5840b4b448e638fcf3b51e3f, type: 2}
+  PlayerEvents: {fileID: 11400000, guid: 7e5de35913131454dbe06c2243ddbc7b, type: 2}
+  EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}
 --- !u!1 &1079240794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,63 +2597,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1001 &1364547777
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518904, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700170199056518906, guid: af0148481e6b48f42bc034914d14e016, type: 3}
-      propertyPath: m_Name
-      value: Spacecraft
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: af0148481e6b48f42bc034914d14e016, type: 3}
 --- !u!1 &1423901635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,7 +3541,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2074417407
 GameObject:

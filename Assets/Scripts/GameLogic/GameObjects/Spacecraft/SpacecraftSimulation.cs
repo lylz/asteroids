@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public struct SpacecraftSimulationProperties
 {
+    public float rotationAngle;
     public float mass;
     public float drag;
 }
@@ -33,9 +34,19 @@ public class SpacecraftSimulation
         _acceleration = force / mass;
         _velocity += _acceleration;
     }
-
-    public Quaternion Rotate(Quaternion rotation, float angle)
+    
+    public Quaternion RotateLeft(Quaternion rotation)
     {
-        return rotation * Quaternion.Euler(new Vector3(0, 0, 1) * angle);
+        return Rotate(rotation, Properties.rotationAngle);
+    }
+
+    public Quaternion RotateRight(Quaternion rotation)
+    {
+        return Rotate(rotation, -Properties.rotationAngle);
+    }
+
+    private Quaternion Rotate(Quaternion rotation, float angle)
+    {
+        return rotation * Quaternion.Euler(Vector3.forward * angle);
     }
 }
