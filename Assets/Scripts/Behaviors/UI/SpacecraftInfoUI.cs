@@ -12,7 +12,7 @@ public class SpacecraftInfoUI : MonoBehaviour
     public Text LaserCooldown;
     public Text LaserRechargeTime;
 
-    [Header("Other")]
+    [Header("Dependencies")]
     public SpacecraftPositionTracker SpacecraftPositionTracker;
     public LaserInfoTracker LaserInfoTracker;
     public PlayerEvents PlayerEvents;

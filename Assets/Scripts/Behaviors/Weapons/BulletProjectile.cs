@@ -4,6 +4,8 @@ public interface IBulletProjectile
 {
 }
 
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class BulletProjectile : MonoBehaviour, IBulletProjectile, ITransformAdapter
 {
     public RapidFireWeaponConfig WeaponConfig;

@@ -1,17 +1,21 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class Asteroid : Enemy, IAsteroid
 {
-    public ScreenBounds ScreenBounds;
-    public EnemyEvents EnemyEvents;
+    [Header("Asteroid Config")]
     public AsteroidConfig AsteroidConfig;
-    public override int ScorePoints { get => _scorePoints; }
-
     [SerializeField]
     private int _scorePoints;
+
+    [Header("Dependencies")]
+    public ScreenBounds ScreenBounds;
+    public EnemyEvents EnemyEvents;
+    
     private AsteroidController _asteroidController;
 
     public override IGameObjectController Controller => _asteroidController;
+    public override int ScorePoints { get => _scorePoints; }
 
     protected override void Start()
     {

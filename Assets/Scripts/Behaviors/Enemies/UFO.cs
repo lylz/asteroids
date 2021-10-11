@@ -1,19 +1,23 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class UFO : Enemy, IUFO
 {
+    [Header("UFO Config")]
+    public float Speed;
+    [SerializeField]
+    private int _scorePoints;
+
+    [Header("Dependencies")]
     public ScreenBounds ScreenBounds;
     public PlayerEvents PlayerEvents;
     public EnemyEvents EnemyEvents;
-    public float Speed;
     public SpacecraftPositionTracker SpacecraftPositionTracker;
-    public override int ScorePoints { get => _scorePoints; }
 
-    [SerializeField]
-    private int _scorePoints;
     private UFOController _ufoController;
 
     public override IGameObjectController Controller => _ufoController;
+    public override int ScorePoints { get => _scorePoints; }
 
     protected override void Start()
     {

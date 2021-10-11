@@ -1,10 +1,14 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Spacecraft : ControllableBehavior
 {
+    [Header("Simulation")]
     public SpacecraftSimulationProperties SpacecraftSimulationProperties;
     public SpacecraftPositionTracker SpacecraftPosition;
 
+    [Header("Weapons")]
     public WeaponBehavior PrimaryWeaponPrefab;
     public WeaponBehavior SecondaryWeaponPrefab;
 
@@ -13,6 +17,7 @@ public class Spacecraft : ControllableBehavior
     [SerializeField]
     public WeaponSlotBehavior _secondaryWeaponSlot;
 
+    [Header("Dependencies")]
     public ScreenBounds ScreenBounds;
     public PlayerEvents PlayerEvents;
 

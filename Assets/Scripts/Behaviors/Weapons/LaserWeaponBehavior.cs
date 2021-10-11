@@ -3,9 +3,9 @@ using UnityEngine;
 public class LaserWeaponBehavior : WeaponBehavior
 {
     public Laser LaserPrefab;
-    public WeaponEvents WeaponEvents;
     public LaserWeaponConfig LaserWeaponConfig;
     public LaserInfoTracker LaserInfoTracker;
+    public WeaponEvents WeaponEvents;
 
     public override IWeaponController WeaponController { get => _weaponController; }
 

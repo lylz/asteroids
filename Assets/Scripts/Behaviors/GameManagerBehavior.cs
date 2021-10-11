@@ -3,16 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerBehavior : MonoBehaviour
 {
-    public InputControlsSystem InputSystem;
-    public ScreenBounds ScreenBounds;
-
     [Header("Score Manager")]
     public ScoreStorage ScoreStorage;
 
     [Header("Spawn Manager")]
     public SpawnWave[] SpawnWaves;
 
-    [Header("Events")]
+    [Header("Dependencies")]
+    public InputControlsSystem InputSystem;
+    public ScreenBounds ScreenBounds;
     public GameEvents GameEvents;
     public PlayerEvents PlayerEvents;
     public EnemyEvents EnemyEvents;

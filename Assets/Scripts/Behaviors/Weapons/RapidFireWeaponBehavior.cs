@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class RapidFireWeaponBehavior : WeaponBehavior
 {
-    public WeaponEvents WeaponEvents;
     public RapidFireWeaponConfig RapidFireWeaponConfig;
     public BulletProjectile BulletPrefab;
+    public WeaponEvents WeaponEvents;
 
     public override IWeaponController WeaponController { get => _weaponController; }
 
