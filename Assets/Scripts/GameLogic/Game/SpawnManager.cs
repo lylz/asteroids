@@ -3,7 +3,6 @@ using UnityEngine;
 public interface ISpawnManager
 {
     public void Start();
-    public void Update(float dt);
 }
 
 public class SpawnManager : ISpawnManager
@@ -49,11 +48,6 @@ public class SpawnManager : ISpawnManager
 
         _currentWaveIndex = 0;
         SpawnCurrentWaveEntries();
-    }
-
-    public void Update(float dt)
-    {
-
     }
 
     private void SpawnPlayer()

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UFO : Enemy, IUFO
 {
+    public PlayerEvents PlayerEvents;
     public EnemyEvents EnemyEvents;
     public float Speed;
     public SpacecraftPositionTracker SpacecraftPositionTracker;
@@ -18,6 +19,7 @@ public class UFO : Enemy, IUFO
         base.Start();
 
         _ufoController = new UFOController(
+            PlayerEvents,
             EnemyEvents,
             this,
             Speed,
