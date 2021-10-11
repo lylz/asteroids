@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Asteroid : Enemy, IAsteroid
 {
+    public ScreenBounds ScreenBounds;
     public EnemyEvents EnemyEvents;
     public AsteroidConfig AsteroidConfig;
     public override int ScorePoints { get => _scorePoints; }
@@ -19,7 +20,7 @@ public class Asteroid : Enemy, IAsteroid
         _asteroidController = new AsteroidController(
             EnemyEvents,
             this,
-            _screenBounds,
+            ScreenBounds,
             this
         );
         
@@ -63,5 +64,10 @@ public class Asteroid : Enemy, IAsteroid
     public IAsteroidConfig GetAsteroidConfig()
     {
         return AsteroidConfig;
+    }
+
+    private void OnDestroy()
+    {
+        EnemyEvents.EnemyDestroyed -= OnAsteroidDestroyed;
     }
 }

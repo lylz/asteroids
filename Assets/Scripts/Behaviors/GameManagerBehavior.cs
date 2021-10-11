@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerBehavior : MonoBehaviour
 {
     public InputControlsSystem InputSystem;
+    public ScreenBounds ScreenBounds;
 
     [Header("Score Manager")]
     public ScoreStorage ScoreStorage;
@@ -23,8 +24,9 @@ public class GameManagerBehavior : MonoBehaviour
     private void Awake()
     {
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        ScreenBounds.bounds = screenBounds * 2;
 
-        _spawnManager = new SpawnManager(PlayerEvents, SpawnWaves, EnemyEvents, screenBounds);
+        _spawnManager = new SpawnManager(PlayerEvents, SpawnWaves, EnemyEvents, ScreenBounds);
         _gameController = new GameController(InputSystem, _spawnManager, GameEvents);
         _scoreManager = new ScoreManager(ScoreStorage, GameEvents, EnemyEvents, PlayerEvents);
 

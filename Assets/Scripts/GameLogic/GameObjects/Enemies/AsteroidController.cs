@@ -13,7 +13,7 @@ public class AsteroidController : GameObjectController
     public AsteroidController(
         IEnemyEvents enemyEvents,
         IAsteroid asteroid,
-        Vector2 screenBounds,
+        IScreenBounds screenBounds,
         ITransformAdapter transformAdapter
     )
         : base(new IPostUpdateProcessor[] { new PortalPostUpdateProcessor(screenBounds, transformAdapter) })
@@ -42,7 +42,6 @@ public class AsteroidController : GameObjectController
 
     public void Hit(Collider2D collider)
     {
-        // TODO: skip other asteroids
         Die();
     }
 

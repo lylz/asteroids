@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Game/Game Events/Player Event")]
+[CreateAssetMenu(menuName = "Game/Game Events/Player Events")]
 public class PlayerEvents : ScriptableObject, IPlayerEvents
 {
     public event UnityAction<Vector3> PlayerSpawned = delegate { };

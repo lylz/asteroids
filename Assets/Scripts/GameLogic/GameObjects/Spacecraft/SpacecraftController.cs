@@ -21,10 +21,10 @@ public class SpacecraftController : GameObjectController
         SpacecraftSimulation spacecraftSimulation,
         IPlayerEvents playerEvents,
         InputControlsSystem inputSystem,
-        Vector2 screenBounds,
+        IScreenBounds screenBounds,
         ISpacecraftPositionTracker spacecraftPosition,
         ITransformAdapter transformAdapter
-    ) // TODO: check it
+    )
         : base(
             new IPostUpdateProcessor[] { new PortalPostUpdateProcessor(screenBounds, transformAdapter), new SpacecraftPositionPostUpdateProcessor(spacecraftPosition, transformAdapter) }
         )

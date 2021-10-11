@@ -29,7 +29,7 @@ public class SpacecraftSimulation
 
     public void AddForce(Vector2 force)
     {
-        float mass = Properties.mass != 0 ? Properties.mass : 1; // TODO: check it
+        float mass = Properties.mass != 0 ? Properties.mass : 0.1f;
 
         _acceleration = force / mass;
         _velocity += _acceleration;

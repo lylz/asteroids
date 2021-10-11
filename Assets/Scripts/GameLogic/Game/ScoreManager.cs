@@ -30,6 +30,7 @@ public class ScoreManager : IScoreManager
 
     ~ScoreManager()
     {
+        _gameEvents.GameExit -= OnGameExit;
         _enemyEvents.EnemyDestroyed -= OnEnemyDestroyed;
         _playerEvents.PlayerDied -= OnPlayerDied;
     }

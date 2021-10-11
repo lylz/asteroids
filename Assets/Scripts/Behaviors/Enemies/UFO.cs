@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UFO : Enemy, IUFO
 {
+    public ScreenBounds ScreenBounds;
     public PlayerEvents PlayerEvents;
     public EnemyEvents EnemyEvents;
     public float Speed;
@@ -24,7 +25,7 @@ public class UFO : Enemy, IUFO
             this,
             Speed,
             SpacecraftPositionTracker,
-            _screenBounds,
+            ScreenBounds,
             this
         );
 
@@ -54,5 +55,10 @@ public class UFO : Enemy, IUFO
     public int GetId()
     {
         return GetInstanceID();
+    }
+
+    private void OnDestroy()
+    {
+        EnemyEvents.EnemyDestroyed -= OnUFODestroyed;
     }
 }

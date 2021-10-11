@@ -5,9 +5,9 @@ public class PortalPostUpdateProcessor : IPostUpdateProcessor
     private ITransformAdapter _transformAdapter;
     private Bounds _screenBounds;
 
-    public PortalPostUpdateProcessor(Vector2 screenBounds, ITransformAdapter transformAdapter)
+    public PortalPostUpdateProcessor(IScreenBounds screenBounds, ITransformAdapter transformAdapter)
     {
-        _screenBounds = new Bounds(new Vector3(), screenBounds * 2);
+        _screenBounds = new Bounds(new Vector3(), screenBounds.Bounds);
         _transformAdapter = transformAdapter;
     }
 

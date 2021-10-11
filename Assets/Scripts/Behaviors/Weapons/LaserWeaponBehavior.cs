@@ -28,8 +28,7 @@ public class LaserWeaponBehavior : WeaponBehavior
     {
         if (_activeLaser != null)
         {
-            Debug.Log("Laser already active, shouldn't be triggered then, seems like a mistake in logic.");
-            // TODO: deactivate laser?
+            OnLaserDeactivated();
         }
 
         _activeLaser = Instantiate(LaserPrefab, transform.position, transform.rotation, transform);

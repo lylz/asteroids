@@ -50,6 +50,6 @@ public class BulletProjectileController : IBulletProjectileController
 
     private void Destroy()
     {
-        BulletDestroyed?.Invoke(); // TODO: UnityActions can be invoked even if nobody is subscribed?
+        BulletDestroyed.Invoke();
     }
 }

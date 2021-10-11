@@ -18,7 +18,7 @@ public class UFOController : GameObjectController
         IUFO ufo,
         float speed,
         ISpacecraftPositionTracker spacecraftPosition,
-        Vector2 screenBounds,
+        IScreenBounds screenBounds,
         ITransformAdapter transformAdapter
     )
         : base(new IPostUpdateProcessor[] { new PortalPostUpdateProcessor(screenBounds, transformAdapter) })

@@ -1691,6 +1691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputSystem: {fileID: 11400000, guid: 13cbcf4c18d02cc46a81e48aa5cf6831, type: 2}
+  ScreenBounds: {fileID: 11400000, guid: a0c0bafdb51a46b438cff0308f1312b1, type: 2}
   ScoreStorage: {fileID: 11400000, guid: 001b051a412c8774d80718819bdde04a, type: 2}
   SpawnWaves:
   - {fileID: 11400000, guid: a78d2b49c707cb547a4e7837104b8bae, type: 2}

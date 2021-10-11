@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f30b3d71b1f3348b3bd23fe807bec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScreenBounds: {fileID: 11400000, guid: a0c0bafdb51a46b438cff0308f1312b1, type: 2}
   EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}
   AsteroidConfig: {fileID: 11400000, guid: f9079731d570b2e4fa2e6a8686290b95, type: 2}
   _scorePoints: 50

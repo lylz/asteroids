@@ -12,7 +12,7 @@ public class SpawnManager : ISpawnManager
     private Vector3 PlayerSpawnPosition = new Vector3(0, 0, 0);
 
     private IPlayerEvents _playerEvents;
-    private Vector2 _screenBounds;
+    private IScreenBounds _screenBounds;
     private IEnemyEvents _enemyEvents;
     private ISpawnWave[] _spawnWaves;
 
@@ -22,13 +22,13 @@ public class SpawnManager : ISpawnManager
         IPlayerEvents playerEvents,
         ISpawnWave[] spawnWaves,
         IEnemyEvents enemyEvents,
-        Vector2 screenBounds
+        IScreenBounds screenBounds
     )
     {
         _playerEvents = playerEvents;
         _spawnWaves = spawnWaves;
         _enemyEvents = enemyEvents;
-        _screenBounds = screenBounds * 2; // TODO: check it
+        _screenBounds = screenBounds;
         _currentWaveIndex = 0;
         _enemiesCount = 0;
 
@@ -79,7 +79,8 @@ public class SpawnManager : ISpawnManager
 
         if (currentWave == null)
         {
-            return; // TODO: handle
+            Debug.LogWarning("SpawnManager tried to spawn a new wave, but there were no waves found.");
+            return;
         }
 
         foreach (ISpawnWaveEntry spawnWaveEntry in currentWave.SpawnWaveEntries)
@@ -90,13 +91,9 @@ public class SpawnManager : ISpawnManager
                 {
                     SpawnAsteroid(spawnWaveEntry.Enemy as IAsteroid);
                 }
-                else if (spawnWaveEntry.Enemy is IUFO)
-                {
-                    SpawnUFO(spawnWaveEntry.Enemy as IUFO);
-                }
                 else
                 {
-                    // TODO: throw error
+                    SpawnEnemy(spawnWaveEntry.Enemy);
                 }
             }
         }
@@ -109,12 +106,17 @@ public class SpawnManager : ISpawnManager
             return null;
         }
 
-        if (_currentWaveIndex > _spawnWaves.Length - 1)
+        if (_currentWaveIndex >= _spawnWaves.Length)
         {
             _currentWaveIndex = _spawnWaves.Length - 1;
         }
 
         return _spawnWaves[_currentWaveIndex];
+    }
+
+    private void SpawnEnemy(IEnemy enemy)
+    {
+        _enemyEvents.InvokeEnemySpawned(enemy, GetSpawnPosition(), Quaternion.identity);
     }
 
     private void SpawnAsteroid(IAsteroid asteroid)
@@ -123,11 +125,6 @@ public class SpawnManager : ISpawnManager
         Quaternion rotation = Quaternion.AngleAxis(Random.Range(0, 180), Vector3.forward);
 
         _enemyEvents.InvokeEnemySpawned(asteroid, position, rotation);
-    }
-
-    private void SpawnUFO(IUFO ufo)
-    {
-        _enemyEvents.InvokeEnemySpawned(ufo, GetSpawnPosition(), Quaternion.identity);
     }
 
     private void OnEnemySpawned(IEnemy enemy, Vector3 position, Quaternion rotation)
@@ -145,23 +142,23 @@ public class SpawnManager : ISpawnManager
     {
         float playerPadding = 10;
         float side = Random.Range(0, 1);
-        float leftBoundX = 0;
-        float rightBoundX = 0;
+        float leftBoundX;
+        float rightBoundX;
 
-        // either spawn to the left of the player or to the right of the player
+        // either spawn to the left or to the right of the player
         if (side == 0)
         {
-            leftBoundX = -_screenBounds.x;
+            leftBoundX = -_screenBounds.Bounds.x;
             rightBoundX = PlayerSpawnPosition.x - playerPadding;
         }
         else
         {
             leftBoundX = PlayerSpawnPosition.x + playerPadding;
-            rightBoundX = _screenBounds.x;
+            rightBoundX = _screenBounds.Bounds.x;
         }
 
         float x = Random.Range(leftBoundX, rightBoundX);
-        float y = Random.Range(-_screenBounds.y, _screenBounds.y);
+        float y = Random.Range(-_screenBounds.Bounds.y, _screenBounds.Bounds.y);
 
         return new Vector3(x, y, 0);
     }

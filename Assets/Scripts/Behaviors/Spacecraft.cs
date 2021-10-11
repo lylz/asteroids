@@ -3,11 +3,17 @@ using UnityEngine;
 public class Spacecraft : ControllableBehavior
 {
     public SpacecraftSimulationProperties SpacecraftSimulationProperties;
-    public SpacecraftPositionTracker SpacecraftPosition; // TODO: check it
+    public SpacecraftPositionTracker SpacecraftPosition;
 
     public WeaponBehavior PrimaryWeaponPrefab;
     public WeaponBehavior SecondaryWeaponPrefab;
 
+    [SerializeField]
+    public WeaponSlotBehavior _primaryWeaponSlot;
+    [SerializeField]
+    public WeaponSlotBehavior _secondaryWeaponSlot;
+
+    public ScreenBounds ScreenBounds;
     public PlayerEvents PlayerEvents;
 
     [SerializeField]
@@ -15,7 +21,6 @@ public class Spacecraft : ControllableBehavior
 
     private SpacecraftSimulation _spacecraftSimulation;
     private SpacecraftController _spacecraftController;
-    private WeaponSlotBehavior[] _weaponSlots;
 
     public override IGameObjectController Controller => _spacecraftController;
 
@@ -23,26 +28,17 @@ public class Spacecraft : ControllableBehavior
     {
         base.Start();
 
-        _weaponSlots = GetComponentsInChildren<WeaponSlotBehavior>();
-
-        if (_weaponSlots.Length != 2)
-        {
-            // TODO: throw exception
-            Debug.LogError("Insufficient amount of slots. Should be 2!");
-            return;
-        }
-
-        _weaponSlots[0].SetWeapon(PrimaryWeaponPrefab);
-        _weaponSlots[1].SetWeapon(SecondaryWeaponPrefab);
+        _primaryWeaponSlot.SetWeapon(PrimaryWeaponPrefab);
+        _secondaryWeaponSlot.SetWeapon(SecondaryWeaponPrefab);
 
         _spacecraftSimulation = new SpacecraftSimulation(SpacecraftSimulationProperties);
         _spacecraftController = new SpacecraftController(
-            _weaponSlots[0].Weapon,
-            _weaponSlots[1].Weapon,
+            _primaryWeaponSlot.Weapon,
+            _secondaryWeaponSlot.Weapon,
             _spacecraftSimulation,
             PlayerEvents,
             _inputSystem,
-            _screenBounds,
+            ScreenBounds,
             SpacecraftPosition,
             this
         );

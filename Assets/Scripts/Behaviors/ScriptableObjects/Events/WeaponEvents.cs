@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Game/Game Events/Weapon Event")]
+[CreateAssetMenu(menuName = "Game/Game Events/Weapon Events")]
 public class WeaponEvents : ScriptableObject, IWeaponEvents
 {
     public event UnityAction<IWeaponConfig> WeaponFired = delegate { };

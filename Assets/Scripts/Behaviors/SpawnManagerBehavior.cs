@@ -22,18 +22,7 @@ public class SpawnManagerBehavior : MonoBehaviour
 
     private void OnEnemySpawned(IEnemy enemy, Vector3 position, Quaternion rotation)
     {
-        if (enemy is Asteroid)
-        {
-            Instantiate(enemy as Asteroid, position, rotation);
-        }
-        else if (enemy is UFO)
-        {
-            Instantiate(enemy as UFO, position, rotation);
-        }
-        else
-        {
-            // TODO: throw an error
-        }
+        Instantiate(enemy as Enemy, position, rotation);
     }
 
     private void OnDisable()

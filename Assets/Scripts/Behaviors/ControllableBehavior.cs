@@ -4,9 +4,6 @@ public abstract class ControllableBehavior : MonoBehaviour, ITransformAdapter
 {
     public abstract IGameObjectController Controller { get; }
 
-    // TODO: move it somewhere
-    protected Vector2 _screenBounds;
-
     public Vector3 position
     {
         get { return transform.position; }
@@ -26,8 +23,6 @@ public abstract class ControllableBehavior : MonoBehaviour, ITransformAdapter
 
     protected virtual void Awake()
     {
-        // TODO: move it somewhere. put it in a singleton, so that it can be calculated once and updated once
-        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     protected virtual void Start()

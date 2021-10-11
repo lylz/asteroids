@@ -154,6 +154,9 @@ MonoBehaviour:
   SpacecraftPosition: {fileID: 11400000, guid: 7be0bad4e9c50334e8c3d137adf88096, type: 2}
   PrimaryWeaponPrefab: {fileID: 1303346343780600043, guid: a2dab3e9fbbeef5438a34cb7381dd417, type: 3}
   SecondaryWeaponPrefab: {fileID: 6952644414917581274, guid: 9d81cad140e5f54489545f9ddb23aa9e, type: 3}
+  _primaryWeaponSlot: {fileID: 8816026466369593722}
+  _secondaryWeaponSlot: {fileID: 5313304142385771056}
+  ScreenBounds: {fileID: 11400000, guid: a0c0bafdb51a46b438cff0308f1312b1, type: 2}
   PlayerEvents: {fileID: 11400000, guid: 7e5de35913131454dbe06c2243ddbc7b, type: 2}
   _inputSystem: {fileID: 11400000, guid: 13cbcf4c18d02cc46a81e48aa5cf6831, type: 2}
 --- !u!1001 &739122084592534956
@@ -218,6 +221,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3943872342002307519, guid: 9cd3ad8615fa85146977e91d2dba4475, type: 3}
   m_PrefabInstance: {fileID: 739122084592534956}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5313304142385771056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4899149390046508956, guid: 9cd3ad8615fa85146977e91d2dba4475, type: 3}
+  m_PrefabInstance: {fileID: 739122084592534956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d160e4f71c1b04caae5bc7353ec920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4153892487174149862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,3 +294,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3943872342002307519, guid: 9cd3ad8615fa85146977e91d2dba4475, type: 3}
   m_PrefabInstance: {fileID: 4153892487174149862}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8816026466369593722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4899149390046508956, guid: 9cd3ad8615fa85146977e91d2dba4475, type: 3}
+  m_PrefabInstance: {fileID: 4153892487174149862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d160e4f71c1b04caae5bc7353ec920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
