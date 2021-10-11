@@ -4,7 +4,6 @@ public interface ISpawnManager
 {
     public void Start();
     public void Update(float dt);
-    public void OnDestroy();
 }
 
 public class SpawnManager : ISpawnManager
@@ -33,7 +32,7 @@ public class SpawnManager : ISpawnManager
         _enemyEvents.EnemyDestroyed += OnEnemyDestroyed;
     }
 
-    public void OnDestroy()
+    ~SpawnManager()
     {
         _enemyEvents.EnemySpawned -= OnEnemySpawned;
         _enemyEvents.EnemyDestroyed -= OnEnemyDestroyed;
@@ -81,7 +80,6 @@ public class SpawnManager : ISpawnManager
         {
             for (int i = 0; i < spawnWaveEntry.Count; i++)
             {
-                // TODO: use InitialSpawnDelayInSeconds
                 if (spawnWaveEntry.Enemy is IAsteroid)
                 {
                     SpawnAsteroid(spawnWaveEntry.Enemy as IAsteroid);

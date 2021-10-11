@@ -16,12 +16,11 @@ public class SpacecraftInfoUI : MonoBehaviour
     public SpacecraftPositionTracker SpacecraftPositionTracker;
     public LaserInfoTracker LaserInfoTracker;
     public PlayerEvents PlayerEvents;
-    public GameEvents GameEvents;
 
     private void Start()
     {
         PlayerEvents.PlayerDied += Hide;
-        GameEvents.GameStarted += Open;
+        Open();
     }
 
     private void Open()
@@ -79,6 +78,5 @@ public class SpacecraftInfoUI : MonoBehaviour
     private void OnDestroy()
     {
         PlayerEvents.PlayerDied -= Hide;
-        GameEvents.GameStarted -= Open;
     }
 }

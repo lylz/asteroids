@@ -8,9 +8,6 @@ public class SpawnWaveEntry : ISpawnWaveEntry
 
     public uint count;
     public uint Count { get => count; }
-
-    public float initialSpawnDelayInSeconds;
-    public float InitialSpawnDelayInSeconds { get => initialSpawnDelayInSeconds; }
 }
 
 [CreateAssetMenu(menuName = "Game/Enemies/Spawn Wave")]

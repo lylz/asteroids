@@ -1,8 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerBehavior : MonoBehaviour
 {
     public GameEvents GameEvents;
+
+    [Header("Score Manager")]
+    public ScoreStorage ScoreStorage;
+    public PlayerEvents PlayerEvents;
 
     [Header("Spawn Manager")]
     public EnemyEvents EnemyEvents;
@@ -10,6 +15,7 @@ public class GameManagerBehavior : MonoBehaviour
 
     private GameController _gameController;
     private SpawnManager _spawnManager;
+    private ScoreManager _scoreManager;
 
     private void Awake()
     {
@@ -17,6 +23,9 @@ public class GameManagerBehavior : MonoBehaviour
 
         _spawnManager = new SpawnManager(SpawnWaves, EnemyEvents, screenBounds);
         _gameController = new GameController(_spawnManager, GameEvents);
+        _scoreManager = new ScoreManager(ScoreStorage, EnemyEvents, PlayerEvents);
+
+        GameEvents.GameRestarted += OnGameRestarted;
     }
 
     private void Start()
@@ -24,8 +33,13 @@ public class GameManagerBehavior : MonoBehaviour
         _gameController.Start();
     }
 
-    private void OnDestroy()
+    private void OnGameRestarted()
     {
-        _gameController.OnDestroy();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.GameRestarted -= OnGameRestarted;
     }
 }

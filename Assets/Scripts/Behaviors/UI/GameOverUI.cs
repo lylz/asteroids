@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -43,10 +42,7 @@ public class GameOverUI : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameOverUIContainer.SetActive(false);
-        StopAllCoroutines();
-        GameEvents.InvokeGameStarted();
+        GameEvents.InvokeGameRestarted();
     }
 
     private void OnDestroy()

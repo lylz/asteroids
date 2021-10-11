@@ -1,10 +1,6 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public interface IGameController
 {
     public void Start();
-    public void OnDestroy();
 }
 
 public class GameController : IGameController
@@ -21,10 +17,5 @@ public class GameController : IGameController
     public void Start()
     {
         _spawnManager.Start();
-    }
-
-    public void OnDestroy()
-    {
-        _spawnManager.OnDestroy();
     }
 }

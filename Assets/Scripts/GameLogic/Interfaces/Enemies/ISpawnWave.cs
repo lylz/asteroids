@@ -7,5 +7,4 @@ public interface ISpawnWaveEntry
 {
     public IEnemy Enemy { get; }
     public uint Count { get; }
-    public float InitialSpawnDelayInSeconds { get; }
 }

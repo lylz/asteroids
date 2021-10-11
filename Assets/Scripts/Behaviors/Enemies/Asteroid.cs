@@ -4,7 +4,10 @@ public class Asteroid : Enemy, IAsteroid
 {
     public EnemyEvents EnemyEvents;
     public AsteroidConfig AsteroidConfig;
+    public override int ScorePoints { get => _scorePoints; }
 
+    [SerializeField]
+    private int _scorePoints;
     private AsteroidController _asteroidController;
 
     public override IGameObjectController Controller => _asteroidController;

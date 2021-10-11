@@ -52,12 +52,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5805385403075648533, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
+      propertyPath: _scorePoints
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805385403075648533, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
       propertyPath: AsteroidConfig
       value: 
       objectReference: {fileID: 11400000, guid: 8060b731a8880794ca6a2869aba9ba6f, type: 2}
     - target: {fileID: 5805385403075648534, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
       propertyPath: m_Name
-      value: MediumAsteroid
+      value: AsteroidMedium
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}

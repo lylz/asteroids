@@ -52,6 +52,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5805385403075648533, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
+      propertyPath: _scorePoints
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805385403075648533, guid: 3aa2a5224af1eec42ba0f0baa6979dce, type: 3}
       propertyPath: AsteroidConfig
       value: 
       objectReference: {fileID: 11400000, guid: 997a8416ba17bac49a2b0b2fe699e599, type: 2}

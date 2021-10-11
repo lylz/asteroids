@@ -5,7 +5,10 @@ public class UFO : Enemy, IUFO
     public EnemyEvents EnemyEvents;
     public float Speed;
     public SpacecraftPositionTracker SpacecraftPositionTracker;
+    public override int ScorePoints { get => _scorePoints; }
 
+    [SerializeField]
+    private int _scorePoints;
     private UFOController _ufoController;
 
     public override IGameObjectController Controller => _ufoController;

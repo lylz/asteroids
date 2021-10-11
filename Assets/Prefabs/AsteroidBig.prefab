@@ -125,3 +125,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}
   AsteroidConfig: {fileID: 11400000, guid: f9079731d570b2e4fa2e6a8686290b95, type: 2}
+  _scorePoints: 50

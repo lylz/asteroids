@@ -126,3 +126,4 @@ MonoBehaviour:
   EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}
   Speed: 2
   SpacecraftPositionTracker: {fileID: 11400000, guid: 7be0bad4e9c50334e8c3d137adf88096, type: 2}
+  _scorePoints: 200
