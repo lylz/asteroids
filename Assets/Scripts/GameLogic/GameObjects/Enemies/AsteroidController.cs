@@ -8,6 +8,7 @@ public class AsteroidController : GameObjectController
     private Vector3 _velocity;
     private float _rotationAngle;
     private ITransformAdapter _transformAdapter;
+    private bool _destroyed;
 
     public AsteroidController(
         IEnemyEvents enemyEvents,
@@ -47,6 +48,12 @@ public class AsteroidController : GameObjectController
 
     private void Die()
     {
+        if (_destroyed)
+        {
+            return;
+        }
+
+        _destroyed = true;
         _enemyEvents.InvokeEnemyDestroyed(_asteroid);
         SpawnAsteroidPieces();
     }

@@ -7,6 +7,7 @@ public class UFOController : GameObjectController
     private float _speed;
     private ISpacecraftPositionTracker _spacecraftPosition;
     private ITransformAdapter _transformAdapter;
+    private bool _destroyed;
 
     // TODO: screen bounds can be moved to the scriptable object?!
     public UFOController(
@@ -44,6 +45,12 @@ public class UFOController : GameObjectController
 
     private void Die()
     {
+        if (_destroyed)
+        {
+            return;
+        }
+
+        _destroyed = true;
         _enemyEvents.InvokeEnemyDestroyed(_ufo);
     }
 }

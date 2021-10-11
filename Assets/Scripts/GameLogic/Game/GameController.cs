@@ -3,23 +3,28 @@ using UnityEngine;
 
 public interface IGameController
 {
-    public List<IEnemy> Enemies { get; }
+    public void Start();
+    public void OnDestroy();
 }
 
 public class GameController : IGameController
 {
-    private List<IEnemy> _enemies = new List<IEnemy>();
-    public List<IEnemy> Enemies { get => _enemies; }
-
+    private ISpawnManager _spawnManager;
     private IGameEvents _gameEvents;
 
-    public GameController(IGameEvents gameEvents)
+    public GameController(ISpawnManager spawnManager, IGameEvents gameEvents)
     {
+        _spawnManager = spawnManager;
         _gameEvents = gameEvents;
     }
 
     public void Start()
     {
-        _gameEvents.InvokeGameStarted();
+        _spawnManager.Start();
+    }
+
+    public void OnDestroy()
+    {
+        _spawnManager.OnDestroy();
     }
 }

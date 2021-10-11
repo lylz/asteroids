@@ -2,34 +2,60 @@ using UnityEngine;
 
 public interface ISpawnManager
 {
+    public void Start();
+    public void Update(float dt);
+    public void OnDestroy();
 }
 
 public class SpawnManager : ISpawnManager
 {
+    private int _enemiesCount;
+
     private Vector2 _screenBounds;
-    private IGameEvents _gameEvents;
     private IEnemyEvents _enemyEvents;
     private ISpawnWave[] _spawnWaves;
 
     private int _currentWaveIndex;
 
     public SpawnManager(
-        IGameEvents gameEvents,
         ISpawnWave[] spawnWaves,
         IEnemyEvents enemyEvents,
         Vector2 screenBounds
     )
     {
-        _gameEvents = gameEvents;
         _spawnWaves = spawnWaves;
         _enemyEvents = enemyEvents;
         _screenBounds = screenBounds * 2; // TODO: check it
         _currentWaveIndex = 0;
+        _enemiesCount = 0;
+
+        _enemyEvents.EnemySpawned += OnEnemySpawned;
+        _enemyEvents.EnemyDestroyed += OnEnemyDestroyed;
     }
 
-    private void Start()
+    public void OnDestroy()
     {
+        _enemyEvents.EnemySpawned -= OnEnemySpawned;
+        _enemyEvents.EnemyDestroyed -= OnEnemyDestroyed;
+    }
+
+    public void Start()
+    {
+        _currentWaveIndex = 0;
         SpawnCurrentWaveEntries();
+    }
+
+    public void Update(float dt)
+    {
+
+    }
+
+    private void CheckNextWave()
+    {
+        if (_enemiesCount == 0)
+        {
+            SpawnNextWave();
+        }
     }
 
     private void SpawnNextWave()
@@ -39,7 +65,7 @@ public class SpawnManager : ISpawnManager
             _currentWaveIndex++;
         }
 
-        // SpawnWave();
+        SpawnCurrentWaveEntries();
     }
 
     private void SpawnCurrentWaveEntries()
@@ -98,6 +124,17 @@ public class SpawnManager : ISpawnManager
     private void SpawnUFO(IUFO ufo)
     {
         _enemyEvents.InvokeEnemySpawned(ufo, GetSpawnPosition(), Quaternion.identity);
+    }
+
+    private void OnEnemySpawned(IEnemy enemy, Vector3 position, Quaternion rotation)
+    {
+        _enemiesCount++;
+    }
+
+    private void OnEnemyDestroyed(IEnemy enemy)
+    {
+        _enemiesCount--;
+        CheckNextWave();
     }
 
     private Vector3 GetSpawnPosition()
