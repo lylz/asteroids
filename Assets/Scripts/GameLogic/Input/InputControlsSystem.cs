@@ -3,17 +3,18 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "Game/Input/Input System")]
-public class InputControlsSystem : ScriptableObject, InputControls.IGameplayActions, InputControls.IMenuActions
+public class InputControlsSystem : ScriptableObject,
+    InputControls.IGameplayActions,
+    InputControls.IMenuActions,
+    InputControls.IGlobalActions
 {
     public event UnityAction MoveForwardEvent = delegate {};
     public event UnityAction RotateRightEvent = delegate {};
     public event UnityAction RotateLeftEvent = delegate {};
     public event UnityAction FirePrimaryEvent = delegate {};
     public event UnityAction FireSecondaryEvent = delegate {};
-    // TODO: move menu events in different input class?
-    // TODO: disable player input
-    // TODO: disable menu input
     public event UnityAction MenuStartEvent = delegate {};
+    public event UnityAction GlobalExitEvent = delegate {};
 
     private InputControls _inputControls;
 
@@ -24,6 +25,7 @@ public class InputControlsSystem : ScriptableObject, InputControls.IGameplayActi
             _inputControls = new InputControls();
             _inputControls.Gameplay.SetCallbacks(this);
             _inputControls.Menu.SetCallbacks(this);
+            _inputControls.Global.SetCallbacks(this);
 
             EnableInput();
         }
@@ -82,15 +84,25 @@ public class InputControlsSystem : ScriptableObject, InputControls.IGameplayActi
         }
     }
 
+    public void OnExit(InputAction.CallbackContext context)
+    {
+        if (context.performed || context.canceled)
+        {
+            GlobalExitEvent.Invoke();
+        }
+    }
+
     public void EnableInput()
     {
         _inputControls.Gameplay.Enable();
         _inputControls.Menu.Enable();
+        _inputControls.Global.Enable();
     }
 
     public void DisableInput()
     {
         _inputControls.Gameplay.Disable();
         _inputControls.Menu.Disable();
+        _inputControls.Global.Disable();
     }
 }

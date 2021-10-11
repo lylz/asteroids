@@ -44,6 +44,15 @@ public class SpacecraftController : GameObjectController
         _inputSystem.FireSecondaryEvent += OnFireSecondary;
     }
 
+    ~SpacecraftController()
+    {
+        _inputSystem.MoveForwardEvent -= OnMoveForward;
+        _inputSystem.RotateLeftEvent -= OnRotateLeft;
+        _inputSystem.RotateRightEvent -= OnRotateRight;
+        _inputSystem.FirePrimaryEvent -= OnFirePrimary;
+        _inputSystem.FireSecondaryEvent -= OnFireSecondary;
+    }
+
     public override void FixedUpdate(float dt)
     {
         base.FixedUpdate(dt);

@@ -1689,6 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameEvents: {fileID: 11400000, guid: 719540af5840b4b448e638fcf3b51e3f, type: 2}
+  InputSystem: {fileID: 11400000, guid: 13cbcf4c18d02cc46a81e48aa5cf6831, type: 2}
   ScoreStorage: {fileID: 11400000, guid: 001b051a412c8774d80718819bdde04a, type: 2}
   PlayerEvents: {fileID: 11400000, guid: 7e5de35913131454dbe06c2243ddbc7b, type: 2}
   EnemyEvents: {fileID: 11400000, guid: f6a53e017e73dfb42b8de97ac7fb4fa5, type: 2}

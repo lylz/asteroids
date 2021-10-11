@@ -73,6 +73,17 @@ public class @InputControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""4b3a0c99-efff-4519-9f39-4ad73f041e97"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4ef7b3dd-82ae-494e-a269-6e157f75b485"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
@@ -84,8 +95,30 @@ public class @InputControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ede2b75a-e3fb-414e-9c51-92895f59a215"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c984e5af-74f9-40a9-b833-fa3efda8d06f"",
                     ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb1b9030-ca6a-4867-8d98-9510be6c34a7"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -143,6 +176,33 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Global"",
+            ""id"": ""c698d432-39aa-4921-ab08-4ab5124db435"",
+            ""actions"": [
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8e0e492-4778-4f27-bdb5-77d899ce58ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c17b0e72-2bb3-40b1-a9c3-26f2c4013c1c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -157,6 +217,9 @@ public class @InputControls : IInputActionCollection, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Start = m_Menu.FindAction("Start", throwIfNotFound: true);
+        // Global
+        m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
+        m_Global_Exit = m_Global.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -300,6 +363,39 @@ public class @InputControls : IInputActionCollection, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // Global
+    private readonly InputActionMap m_Global;
+    private IGlobalActions m_GlobalActionsCallbackInterface;
+    private readonly InputAction m_Global_Exit;
+    public struct GlobalActions
+    {
+        private @InputControls m_Wrapper;
+        public GlobalActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Exit => m_Wrapper.m_Global_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Global; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GlobalActions set) { return set.Get(); }
+        public void SetCallbacks(IGlobalActions instance)
+        {
+            if (m_Wrapper.m_GlobalActionsCallbackInterface != null)
+            {
+                @Exit.started -= m_Wrapper.m_GlobalActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_GlobalActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_GlobalActionsCallbackInterface.OnExit;
+            }
+            m_Wrapper.m_GlobalActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+        }
+    }
+    public GlobalActions @Global => new GlobalActions(this);
     public interface IGameplayActions
     {
         void OnMoveForward(InputAction.CallbackContext context);
@@ -311,5 +407,9 @@ public class @InputControls : IInputActionCollection, IDisposable
     public interface IMenuActions
     {
         void OnStart(InputAction.CallbackContext context);
+    }
+    public interface IGlobalActions
+    {
+        void OnExit(InputAction.CallbackContext context);
     }
 }

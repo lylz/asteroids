@@ -3,19 +3,19 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Score Storage")]
 public class ScoreStorage : ScriptableObject, IScoreStorage
 {
-    private int _currentScore = 0;
-    private int _highestScore = 0;
+    public int currentScore = 0;
+    public int highestScore = 0;
 
-    public int CurrentScore { get => _currentScore; }
-    public int HighestScore { get => _highestScore; }
+    public int CurrentScore { get => currentScore; }
+    public int HighestScore { get => highestScore; }
 
     public void SetCurrentScore(int score)
     {
-        _currentScore = score;
+        currentScore = score;
     }
 
     public void SetHighestScore(int score)
     {
-        _highestScore = score;
+        highestScore = score;
     }
 }
