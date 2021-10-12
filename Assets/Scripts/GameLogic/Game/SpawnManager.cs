@@ -9,7 +9,8 @@ public class SpawnManager : ISpawnManager
 {
     private int _enemiesCount;
 
-    private Vector3 PlayerSpawnPosition = new Vector3(0, 0, 0);
+    private const float kPlayerPadding = 2f;
+    private Vector3 PlayerSpawnPosition = Vector3.zero;
 
     private IPlayerEvents _playerEvents;
     private IScreenBounds _screenBounds;
@@ -140,7 +141,6 @@ public class SpawnManager : ISpawnManager
 
     private Vector3 GetSpawnPosition()
     {
-        float playerPadding = 10;
         float side = Random.Range(0, 1);
         float leftBoundX;
         float rightBoundX;
@@ -149,11 +149,11 @@ public class SpawnManager : ISpawnManager
         if (side == 0)
         {
             leftBoundX = -_screenBounds.Bounds.x;
-            rightBoundX = PlayerSpawnPosition.x - playerPadding;
+            rightBoundX = PlayerSpawnPosition.x - kPlayerPadding;
         }
         else
         {
-            leftBoundX = PlayerSpawnPosition.x + playerPadding;
+            leftBoundX = PlayerSpawnPosition.x + kPlayerPadding;
             rightBoundX = _screenBounds.Bounds.x;
         }
 
